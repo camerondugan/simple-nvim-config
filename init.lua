@@ -43,7 +43,7 @@ What is Kickstart?
 
 Kickstart Guide:
 
-  TODO: The very first thing you should do is to run the command `:Tutor` in Neovim.
+  DONE: The very first thing you should do is to run the command `:Tutor` in Neovim.
 
     If you don't know what this means, type the following:
       - <escape key>
@@ -99,7 +99,7 @@ vim.g.maplocalleader = ' '
 vim.opt.number = true
 -- You can also add relative line numbers, for help with jumping.
 --  Experiment for yourself to see if you like it!
--- vim.opt.relativenumber = true
+vim.opt.relativenumber = true
 
 -- Enable mouse mode, can be useful for resizing splits for example!
 vim.opt.mouse = 'a'
@@ -531,17 +531,17 @@ require('lazy').setup {
       --  - settings (table): Override the default settings passed when initializing the server.
       --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
       local servers = {
-        -- clangd = {},
-        -- gopls = {},
-        -- pyright = {},
-        -- rust_analyzer = {},
+        clangd = {},
+        gopls = {},
+        pyright = {},
+        rust_analyzer = {},
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
         --
         -- Some languages (like typescript) have entire language plugins that can be useful:
         --    https://github.com/pmizio/typescript-tools.nvim
         --
         -- But for many setups, the LSP (`tsserver`) will work just fine
-        -- tsserver = {},
+        tsserver = {},
         --
 
         lua_ls = {
@@ -585,6 +585,49 @@ require('lazy').setup {
       local ensure_installed = vim.tbl_keys(servers or {})
       vim.list_extend(ensure_installed, {
         'stylua', -- Used to format lua code
+        'nil',
+        'pyright',
+        'rust-analyzer',
+        'jdtls',
+        'gopls',
+        'delve',
+        'asmfmt',
+        'autopep8',
+        'bash-debug-adapter',
+        'bash-language-server',
+        'black',
+        'clang-format',
+        'clangd',
+        'codelldb',
+        'dart-debug-adapter',
+        'debugpy',
+        'gdtoolkit',
+        'gofumpt',
+        'goimports',
+        'gomodifytags',
+        'gradle-language-server',
+        'iferr',
+        'impl',
+        'isort',
+        'java-debug-adapter',
+        'java-test',
+        'json-lsp',
+        'lemminx',
+        'ltex-ls',
+        'lua-language-server',
+        'luacheck',
+        'marksman',
+        'netcoredbg',
+        'omnisharp',
+        'omnisharp-mono',
+        'prettierd',
+        'remark-language-server',
+        'shellcheck',
+        'shfmt',
+        'shopify-theme-check',
+        'stylua',
+        'taplo',
+        'yaml-language-server',
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
@@ -614,11 +657,11 @@ require('lazy').setup {
       formatters_by_ft = {
         lua = { 'stylua' },
         -- Conform can also run multiple formatters sequentially
-        -- python = { "isort", "black" },
+        python = { 'isort', 'black' },
         --
         -- You can use a sub-list to tell conform to run *until* a formatter
         -- is found.
-        -- javascript = { { "prettierd", "prettier" } },
+        javascript = { { 'prettierd', 'prettier' } },
       },
     },
   },
@@ -807,7 +850,7 @@ require('lazy').setup {
   --  Uncomment any of the lines below to enable them (you will need to restart nvim).
   --
   -- require 'kickstart.plugins.debug',
-  -- require 'kickstart.plugins.indent_line',
+  require 'kickstart.plugins.indent_line',
 
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
   --    This is the easiest way to modularize your config.
