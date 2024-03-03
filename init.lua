@@ -10,7 +10,7 @@ vim.g.maplocalleader = ' '
 --  For more options, you can see `:help option-list`
 
 -- Make line numbers default
--- vim.opt.number = true
+vim.opt.number = true
 -- You can also add relative line numbers, for help with jumping.
 --  Experiment for yourself to see if you like it!
 vim.opt.relativenumber = true
@@ -101,8 +101,9 @@ vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right win
 vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
 vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 
--- Kebinds for plugins
-vim.keymap.set('n', '<leader>gg', '<cmd>LazyGitCurrentFile<CR>')
+-- Keybindings for plugins
+vim.keymap.set('n', '<leader>gg', '<cmd>LazyGitCurrentFile<CR>', { desc = 'LazyGitCurrentFile' })
+vim.keymap.set('n', '<leader>n', '<cmd>Neorg<CR>', { desc = 'Neorg commands' })
 
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
@@ -152,13 +153,85 @@ require('lazy').setup {
   -- "gc" to comment visual regions/lines
   { 'numToStr/Comment.nvim', opts = {} },
 
-  -- Auto Save buffers
-  { 'Pocco81/auto-save.nvim', opts = {} },
+  -- Auto-Save buffers
+  {
+    'Pocco81/auto-save.nvim',
+    opts = {
+      trigger_events = { 'InsertLeave', 'TextChanged' },
+      condition = function(buf)
+        local fn = vim.fn
+        local utils = require 'auto-save.utils.data'
+        if
+          fn.getbufvar(buf, '&modifiable') == 1
+          and utils.not_in(fn.getbufvar(buf, '&filetype'), {})
+          and string.find(fn.getbufvar(buf, '&name'), '__harpoon__')
+        then
+          return true
+        end
+        return false
+      end,
+      config = function()
+        vim.keymap.set('n', '<leader>ta', '<cmd>ASToggle<CR>', { desc = 'auto-save toggle' })
+      end,
+    },
+  },
 
-  -- Zoxide
+  -- Zoxide (fast directory change)
   { 'nanotee/zoxide.vim', lazy = false },
 
-  -- Neorg config
+  -- Harpoon2 (fast buffer change)
+  {
+    'ThePrimeagen/harpoon',
+    branch = 'harpoon2',
+    dependencies = { 'nvim-lua/plenary.nvim', 'nvim-telescope/telescope.nvim' },
+    config = function()
+      -- Harpoon with telescope
+      local harpoon = require 'harpoon'
+      harpoon:setup()
+
+      vim.keymap.set('n', '<leader>a', function()
+        harpoon:list():append()
+      end, { desc = 'Harpoon2 add' })
+      vim.keymap.set('n', '<C-e>', function()
+        harpoon.ui:toggle_quick_menu(harpoon:list())
+      end)
+
+      vim.keymap.set('n', '<C-h>', function()
+        harpoon:list():select(1)
+      end)
+      vim.keymap.set('n', '<C-j>', function()
+        harpoon:list():select(2)
+      end)
+      vim.keymap.set('n', '<C-k>', function()
+        harpoon:list():select(3)
+      end)
+      vim.keymap.set('n', '<C-l>', function()
+        harpoon:list():select(4)
+      end)
+
+      -- Toggle previous & next buffers stored within Harpoon list
+      vim.keymap.set('n', '<C-S-p>', function()
+        harpoon:list():prev()
+      end)
+      vim.keymap.set('n', '<C-S-n>', function()
+        harpoon:list():next()
+      end)
+    end,
+  },
+
+  -- Refactoring (fast multi-lang Refactor command)
+  {
+    'ThePrimeagen/refactoring.nvim',
+    dependencies = {
+      'nvim-lua/plenary.nvim',
+      'nvim-treesitter/nvim-treesitter',
+    },
+    config = function()
+      require('refactoring').setup()
+    end,
+  },
+
+  -- Neorg config (note taking setup)
   {
     'nvim-neorg/neorg',
     build = ':Neorg sync-parsers',
@@ -246,7 +319,7 @@ require('lazy').setup {
       require('which-key').register {
         ['<leader>c'] = { name = '[C]ode', _ = 'which_key_ignore' },
         ['<leader>d'] = { name = '[D]ocument', _ = 'which_key_ignore' },
-        ['<leader>r'] = { name = '[R]ename', _ = 'which_key_ignore' },
+        ['<leader>r'] = { name = '[R]efactor', _ = 'which_key_ignore' },
         ['<leader>s'] = { name = '[S]earch', _ = 'which_key_ignore' },
         ['<leader>w'] = { name = '[W]orkspace', _ = 'which_key_ignore' },
         ['<leader>g'] = { name = '[G]it', _ = 'which_key_ignore' },
@@ -362,7 +435,9 @@ require('lazy').setup {
       end, { desc = '[S]earch [/] in Open Files' })
 
       -- Shortcut for searching your neovim configuration files
-      vim.keymap.set('n', '<leader>sn', function() end, { desc = '[S]earch [N]eovim files' })
+      vim.keymap.set('n', '<leader>sn', function()
+        builtin.find_files { cwd = vim.fn.stdpath 'config' }
+      end, { desc = '[S]earch [N]eovim files' })
     end,
   },
 
@@ -768,16 +843,16 @@ require('lazy').setup {
       -- Simple and easy statusline.
       --  You could remove this setup call if you don't like it,
       --  and try some other statusline plugin
-      local statusline = require 'mini.statusline'
-      statusline.setup()
+      -- local statusline = require 'mini.statusline'
+      -- statusline.setup()
 
       -- You can configure sections in the statusline by overriding their
       -- default behavior. For example, here we disable the section for
       -- cursor information because line numbers are already enabled
       ---@diagnostic disable-next-line: duplicate-set-field
-      statusline.section_location = function()
-        return ''
-      end
+      -- statusline.section_location = function()
+      --   return ''
+      -- end
 
       -- ... and there is more!
       --  Check out: https://github.com/echasnovski/mini.nvim
