@@ -115,7 +115,10 @@ return {
   {
     'nvim-neorg/neorg',
     build = ':Neorg sync-parsers',
-    dependencies = { 'nvim-lua/plenary.nvim' },
+    dependencies = {
+      'nvim-lua/plenary.nvim',
+      'nvim-neorg/neorg-telescope',
+    },
     event = 'VeryLazy',
     opts = {
       load = {
@@ -123,6 +126,7 @@ return {
         ['core.concealer'] = {}, -- Adds pretty icons to your documents
         ['core.keybinds'] = {}, -- Adds default keybindings
         ['core.summary'] = {}, -- Adds generate-workspace-summary
+        -- ['core.ui.calendar'] = {}, -- Available in nvim 0.10.0+
         ['core.completion'] = {
           config = {
             engine = 'nvim-cmp',
@@ -137,6 +141,18 @@ return {
             default_workspace = 'notes',
           },
         },
+      },
+    },
+    keys = {
+      {
+        '<leader>n',
+        '<cmd>Neorg<CR>',
+        { desc = 'Neorg commands' },
+      },
+      {
+        '<leader>sN',
+        '<cmd>Telescope neorg find_linkable<CR>',
+        { desc = 'Neorg' },
       },
     },
   },

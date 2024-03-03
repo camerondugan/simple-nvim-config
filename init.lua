@@ -12,13 +12,8 @@ vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next [D]iagn
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Show diagnostic [E]rror messages' })
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
 
--- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
--- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
--- is not what someone will guess without a bit more experience.
---
--- NOTE: This won't work in all terminal emulators/tmux/etc. Try your own mapping
--- or just use <C-\><C-n> to exit terminal mode
-vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
+-- Terminal Better Exit
+vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n><cmd>ToggleTerm<CR>', { desc = 'Exit terminal mode' })
 
 -- TIP: Disable arrow keys in normal mode
 -- vim.keymap.set('n', '<left>', '<cmd>echo "Use h to move!!"<CR>')
@@ -37,7 +32,6 @@ vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' }
 
 -- Keybindings for plugins
 vim.keymap.set('n', '<leader>gg', '<cmd>LazyGitCurrentFile<CR>', { desc = 'LazyGitCurrentFile' })
-vim.keymap.set('n', '<leader>n', '<cmd>Neorg<CR>', { desc = 'Neorg commands' })
 
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
@@ -187,7 +181,8 @@ require('lazy').setup {
       -- telescope picker. This is really useful to discover what Telescope can
       -- do as well as how to actually do it!
       --
-      local z_utils = require 'telescope._extensions.zoxide.utils'
+
+      -- local z_utils = require 'telescope._extensions.zoxide.utils'
 
       -- [[ Configure Telescope ]]
       -- See `:help telescope` and `:help telescope.setup()`
@@ -397,19 +392,27 @@ require('lazy').setup {
       --  - settings (table): Override the default settings passed when initializing the server.
       --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
       local servers = {
+        bashls = {},
         clangd = {},
         gopls = {},
+        gradle_ls = {},
+        jdtls = {},
+        jsonls = {},
+        lemminx = {},
+        ltex = {},
+        marksman = {},
+        nil_ls = {},
+        omnisharp = {},
+        omnisharp_mono = {},
         pyright = {},
         rust_analyzer = {},
-        typos_lsp = {},
-        -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
-        --
+        theme_check = {}, -- shopify
+        taplo = {},
         -- Some languages (like typescript) have entire language plugins that can be useful:
         --    https://github.com/pmizio/typescript-tools.nvim
-        --
-        -- But for many setups, the LSP (`tsserver`) will work just fine
         tsserver = {},
-        --
+        typos_lsp = {},
+        yamlls = {},
 
         lua_ls = {
           -- cmd = {...},
@@ -452,46 +455,17 @@ require('lazy').setup {
       local ensure_installed = vim.tbl_keys(servers or {})
       vim.list_extend(ensure_installed, {
         'stylua', -- Used to format lua code
-        'nil',
-        'pyright',
-        'rust-analyzer',
-        'jdtls',
-        'delve',
         'asmfmt',
         'autopep8',
-        'bash-debug-adapter',
-        'bash-language-server',
         'black',
         'clang-format',
-        'clangd',
-        'codelldb',
-        'dart-debug-adapter',
-        'debugpy',
         'gdtoolkit',
         'gofumpt',
         'goimports',
         'gomodifytags',
-        'gradle-language-server',
-        'iferr',
-        'impl',
         'isort',
-        'java-debug-adapter',
-        'java-test',
-        'json-lsp',
-        'lemminx',
-        'ltex-ls',
-        'lua-language-server',
-        'luacheck',
-        'marksman',
-        'netcoredbg',
-        'omnisharp',
-        'omnisharp-mono',
         'prettierd',
-        'shellcheck',
         'shfmt',
-        'shopify-theme-check',
-        'taplo',
-        'yaml-language-server',
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
@@ -522,7 +496,6 @@ require('lazy').setup {
         lua = { 'stylua' },
         -- Conform can also run multiple formatters sequentially
         python = { 'isort', 'black' },
-        go = { 'gofumpt' },
         -- You can use a sub-list to tell conform to run *until* a formatter
         -- is found.
         javascript = { { 'prettierd', 'prettier' } },
@@ -559,13 +532,14 @@ require('lazy').setup {
       --    you can use this plugin to help you. It even has snippets
       --    for various frameworks/libraries/etc. but you will have to
       --    set up the ones that are useful for you.
-      'rafamadriz/friendly-snippets',
+      { 'rafamadriz/friendly-snippets' },
     },
     config = function()
       -- See `:help cmp`
       local cmp = require 'cmp'
       local luasnip = require 'luasnip'
       luasnip.config.setup {}
+      require('luasnip.loaders.from_vscode').lazy_load()
 
       cmp.setup {
         snippet = {
