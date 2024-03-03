@@ -640,7 +640,7 @@ require('lazy').setup {
       require('mini.pairs').setup()
 
       -- Start page for nvim
-      require('mini.starter').setup()
+      -- require('mini.starter').setup()
 
       -- ... and there is more!
       --  Check out: https://github.com/echasnovski/mini.nvim
