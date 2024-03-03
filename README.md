@@ -24,7 +24,7 @@ Warning: Do not press these keybindings all at once, press in order (not necessa
 
 ## Note-taking Workflow: (Neorg)
 
-(https://github.com/nvim-neorg/neorg)[https://github.com/nvim-neorg/neorg]
+[ https://github.com/nvim-neorg/neorg ]( https://github.com/nvim-neorg/neorg )
 
 * Show Neorg index: space n enter (runs :Neorg command then selects index)
 
