@@ -163,7 +163,7 @@ return {
       {
         '<leader>sN',
         '<cmd>Telescope neorg find_linkable<CR>',
-        desc = '[S]earch [N]eorg',
+        desc = 'Search Neorg',
       },
       {
         '<localleader>ni',
