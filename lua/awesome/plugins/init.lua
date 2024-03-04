@@ -26,6 +26,17 @@ return {
       {
         '<leader>tt',
         '<cmd>ToggleTerm<CR>',
+        desc = 'ToggleTerm',
+      },
+      {
+        '<leader>tl',
+        '<cmd>ToggleTerm direction=vertical size=50<CR>',
+        desc = 'ToggleTerm right',
+      },
+      {
+        '<leader>ts',
+        '<cmd>ToggleTermSendVisualSelection<CR>',
+        desc = 'ToggleTerm send selection',
       },
     },
   },
@@ -40,7 +51,7 @@ return {
         if
           fn.getbufvar(buf, '&modifiable') == 1
           and utils.not_in(fn.getbufvar(buf, '&filetype'), {})
-          and string.find(fn.getbufvar(buf, '&name'), '__harpoon__')
+          and string.find(fn.getbufvar(buf, '&name'), '__harpoon__') --harpoon fix
         then
           return true
         end
@@ -147,14 +158,29 @@ return {
       {
         '<leader>n',
         '<cmd>Neorg<CR>',
-        { desc = 'Neorg commands' },
+        desc = 'Neorg commands',
       },
       {
         '<leader>sN',
         '<cmd>Telescope neorg find_linkable<CR>',
-        { desc = 'Neorg' },
+        desc = '[S]earch [N]eorg',
+      },
+      {
+        '<localleader>ni',
+        '<cmd>Neorg index<CR>',
+        desc = 'Neorg index',
       },
     },
+  },
+
+  -- Markdown Preview
+  {
+    'iamcco/markdown-preview.nvim',
+    cmd = { 'MarkdownPreviewToggle', 'MarkdownPreview', 'MarkdownPreviewStop' },
+    ft = { 'markdown' },
+    build = function()
+      vim.fn['mkdp#util#install']()
+    end,
   },
 
   -- Git plugins
