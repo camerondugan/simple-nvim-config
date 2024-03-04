@@ -18,7 +18,7 @@ Warning: Do not press these keybindings all at once, press in order (not necessa
 
 ## Programming Workflow:
 
-* Find Directory (auto opens file search): space sd (launches telescope zoxide list, then file picker)
+* Find Directory: space sd (launches telescope zoxide list)
 * Find File (current directory): space sf (launches telescope for files)
 * Copy/Paste/Delete/Rename many files: space f (launches floating Neotree)
 
