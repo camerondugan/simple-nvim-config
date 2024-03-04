@@ -72,6 +72,11 @@ return {
     opts = {},
   },
 
+  { -- Highlight colors
+    'brenoprata10/nvim-highlight-colors',
+    opts = {},
+  },
+
   { -- Harpoon2 (fast buffer change)
     'ThePrimeagen/harpoon',
     branch = 'harpoon2',

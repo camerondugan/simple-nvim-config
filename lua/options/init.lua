@@ -66,5 +66,7 @@ vim.opt.cursorline = true
 vim.opt.scrolloff = 10
 
 -- Plugin Options
+vim.opt.termguicolors = true
+--vim.opt.t_Co = 256
 vim.opt.conceallevel = 2
 vim.opt.foldlevel = 90
