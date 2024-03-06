@@ -44,15 +44,11 @@ return {
   { -- Auto-Save buffers
     'Pocco81/auto-save.nvim',
     opts = {
-      trigger_events = { 'InsertLeave', 'TextChanged' },
       condition = function(buf)
         local fn = vim.fn
+        local ignoreFiletypes = { 'harpoon' }
         local utils = require 'auto-save.utils.data'
-        if
-          fn.getbufvar(buf, '&modifiable') == 1
-          and utils.not_in(fn.getbufvar(buf, '&filetype'), {})
-          and string.find(fn.getbufvar(buf, '&name'), '__harpoon__') --harpoon fix
-        then
+        if fn.getbufvar(buf, '&modifiable') == 1 and utils.not_in(fn.getbufvar(buf, '&filetype'), ignoreFiletypes) then
           return true
         end
         return false
@@ -61,6 +57,7 @@ return {
     keys = {
       { '<leader>ta', '<cmd>ASToggle<CR>', desc = 'auto-save toggle' },
     },
+    lazy = false,
   },
 
   -- Zoxide (fast directory change)
