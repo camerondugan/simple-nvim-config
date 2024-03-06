@@ -72,6 +72,11 @@ return {
     opts = {},
   },
 
+  { -- Highlight colors
+    'brenoprata10/nvim-highlight-colors',
+    opts = {},
+  },
+
   { -- Harpoon2 (fast buffer change)
     'ThePrimeagen/harpoon',
     branch = 'harpoon2',
@@ -163,7 +168,7 @@ return {
       {
         '<leader>sN',
         '<cmd>Telescope neorg find_linkable<CR>',
-        desc = '[S]earch [N]eorg',
+        desc = 'Search Neorg',
       },
       {
         '<localleader>ni',
