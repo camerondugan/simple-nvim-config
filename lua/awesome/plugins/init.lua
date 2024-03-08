@@ -25,12 +25,12 @@ return {
     keys = {
       {
         '<leader>tt',
-        '<cmd>ToggleTerm<CR>',
+        '<cmd>ToggleTerm<CR><cmd>startinsert<CR>',
         desc = 'ToggleTerm',
       },
       {
         '<leader>tl',
-        '<cmd>ToggleTerm direction=vertical size=50<CR>',
+        '<cmd>ToggleTerm direction=vertical size=50<CR><cmd>startinsert<CR>',
         desc = 'ToggleTerm right',
       },
       {
@@ -53,11 +53,12 @@ return {
         end
         return false
       end,
+      debounce_delay = 3000, --milliseconds
     },
     keys = {
       { '<leader>ta', '<cmd>ASToggle<CR>', desc = 'auto-save toggle' },
     },
-    lazy = false,
+    event = 'InsertEnter',
   },
 
   -- Zoxide (fast directory change)
@@ -188,7 +189,7 @@ return {
   -- Git plugins
   {
     'kdheepak/lazygit.nvim',
-    cmd = {
+    cmd = { --which cmds load lazygit plugin
       'LazyGit',
       'LazyGitConfig',
       'LazyGitCurrentFile',
