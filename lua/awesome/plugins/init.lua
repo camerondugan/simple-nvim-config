@@ -11,6 +11,16 @@ return {
       'MunifTanjim/nui.nvim',
       '3rd/image.nvim',
     },
+    opts = {
+      event_handlers = {
+        {
+          event = 'neo_tree_buffer_enter',
+          handler = function(_)
+            vim.opt.relativenumber = true
+          end,
+        },
+      },
+    },
     keys = {
       {
         '<leader>f',
