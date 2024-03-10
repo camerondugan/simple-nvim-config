@@ -394,17 +394,22 @@ require('lazy').setup {
       local servers = {
         bashls = {},
         clangd = {},
+        codespell = {},
+        docker_compose_language_service = {},
         gopls = {},
         gradle_ls = {},
-        jdtls = {},
+        jdtls = {}, --java lsp
         jsonls = {},
-        lemminx = {},
-        marksman = {},
+        lemminx = {}, --xml
+        luacheck = {},
+        marksman = {}, --markdown
         nil_ls = {},
         omnisharp = {},
         omnisharp_mono = {},
         pyright = {},
         rust_analyzer = {},
+        shellcheck = {},
+        shellharden = {},
         theme_check = {}, -- shopify
         taplo = {},
         -- Some languages (like typescript) have entire language plugins that can be useful:
@@ -412,7 +417,6 @@ require('lazy').setup {
         tsserver = {},
         typos_lsp = {},
         yamlls = {},
-
         lua_ls = {
           -- cmd = {...},
           -- filetypes { ...},
@@ -465,6 +469,16 @@ require('lazy').setup {
         'isort',
         'prettierd',
         'shfmt',
+        'java-test',
+        -- linters
+        'dockerfile-language-server',
+        'golangci-lint',
+        'gospel', -- go spell checker
+        'hadolint', -- docker
+        'jsonlint', -- json
+        'proselint',
+        'quick-lint-js', -- javascript
+        'yamllint', -- yaml
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
@@ -539,6 +553,9 @@ require('lazy').setup {
       local luasnip = require 'luasnip'
       luasnip.config.setup {}
       require('luasnip.loaders.from_vscode').lazy_load()
+      require('luasnip.loaders.from_snipmate').lazy_load()
+      require('luasnip.loaders.from_lua').lazy_load()
+      luasnip.filetype_extend('text', { 'license' })
 
       cmp.setup {
         snippet = {
