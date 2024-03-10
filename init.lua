@@ -465,18 +465,21 @@ require('lazy').setup {
         'gdtoolkit',
         'gofumpt',
         'goimports',
+        'golines',
         'gomodifytags',
         'isort',
+        'prettier',
         'prettierd',
         'shfmt',
         'java-test',
-        -- linters
         'dockerfile-language-server',
+        -- linters
         'golangci-lint',
-        'gospel', -- go spell checker
-        'hadolint', -- docker
-        'jsonlint', -- json
-        'proselint', -- english linter
+        'markdownlint',
+        -- 'gospel', -- go spell checker
+        -- 'hadolint', -- docker
+        -- 'jsonlint', -- json
+        -- 'proselint', -- english linter
         'quick-lint-js', -- javascript
         'yamllint', -- yaml
       })
@@ -500,18 +503,27 @@ require('lazy').setup {
   { -- Autoformat
     'stevearc/conform.nvim',
     opts = {
-      notify_on_error = false,
+      notify_on_error = true,
       format_on_save = {
-        timeout_ms = 500,
         lsp_fallback = true,
+        timeout_ms = 500,
       },
       formatters_by_ft = {
-        lua = { 'stylua' },
+        docker = { 'hadolint' },
+        dockerfile = { 'dockerfile-language-server' },
         -- Conform can also run multiple formatters sequentially
-        python = { 'isort', 'black' },
-        -- You can use a sub-list to tell conform to run *until* a formatter
-        -- is found.
+        go = { 'goimports', 'golines', 'gofmt' },
+        -- You can use a sub-list to tell conform to run *until* a formatter is
+        -- found.
+        markdown = { 'markdownlint' },
         javascript = { { 'prettierd', 'prettier' } },
+        json = { 'jsonlint' },
+        lua = { 'stylua' },
+        python = { 'isort', 'black' },
+        text = { 'proselint' },
+        sh = { 'shellharden', 'shellcheck' },
+        ['*'] = { 'codespell' },
+        ['_'] = { 'trim_whitespace' },
       },
     },
   },

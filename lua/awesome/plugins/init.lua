@@ -53,6 +53,7 @@ return {
 
   { -- Auto-Save buffers
     'Pocco81/auto-save.nvim',
+    event = 'InsertEnter',
     opts = {
       condition = function(buf)
         local fn = vim.fn
@@ -68,7 +69,6 @@ return {
     keys = {
       { '<leader>ta', '<cmd>ASToggle<CR>', desc = 'auto-save toggle' },
     },
-    event = 'InsertEnter',
   },
 
   -- Zoxide (fast directory change)
