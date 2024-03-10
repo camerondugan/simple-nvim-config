@@ -476,10 +476,6 @@ require('lazy').setup {
         -- linters
         'golangci-lint',
         'markdownlint',
-        -- 'gospel', -- go spell checker
-        -- 'hadolint', -- docker
-        -- 'jsonlint', -- json
-        -- 'proselint', -- english linter
         'quick-lint-js', -- javascript
         'yamllint', -- yaml
       })
@@ -520,7 +516,7 @@ require('lazy').setup {
         json = { 'jsonlint' },
         lua = { 'stylua' },
         python = { 'isort', 'black' },
-        text = { 'proselint' },
+        text = {},
         sh = { 'shellharden', 'shellcheck' },
         ['*'] = { 'codespell' },
         ['_'] = { 'trim_whitespace' },
