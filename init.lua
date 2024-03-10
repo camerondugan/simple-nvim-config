@@ -119,10 +119,11 @@ require('lazy').setup {
       require('which-key').register {
         ['<leader>c'] = { name = 'Code', _ = 'which_key_ignore' },
         ['<leader>d'] = { name = 'Document', _ = 'which_key_ignore' },
+        ['<leader>g'] = { name = 'Git', _ = 'which_key_ignore' },
         ['<leader>r'] = { name = 'Refactor', _ = 'which_key_ignore' },
         ['<leader>s'] = { name = 'Search', _ = 'which_key_ignore' },
+        ['<leader>t'] = { name = 'Toggle', _ = 'which_key_ignore' },
         ['<leader>w'] = { name = 'Workspace', _ = 'which_key_ignore' },
-        ['<leader>g'] = { name = 'Git', _ = 'which_key_ignore' },
       }
     end,
   },
@@ -402,7 +403,6 @@ require('lazy').setup {
         jsonls = {},
         lemminx = {}, --xml
         luacheck = {},
-        marksman = {}, --markdown
         nil_ls = {},
         omnisharp = {},
         omnisharp_mono = {},
@@ -476,7 +476,7 @@ require('lazy').setup {
         'gospel', -- go spell checker
         'hadolint', -- docker
         'jsonlint', -- json
-        'proselint',
+        'proselint', -- english linter
         'quick-lint-js', -- javascript
         'yamllint', -- yaml
       })
