@@ -396,7 +396,12 @@ require('lazy').setup {
       --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
       local servers = {
         bashls = {},
-        clangd = {},
+        clangd = {
+          capabilities = {
+            signatureHelpProvider = false,
+            offsetEncoding = 'utf-16',
+          },
+        },
         codespell = {},
         docker_compose_language_service = {},
         gopls = {},

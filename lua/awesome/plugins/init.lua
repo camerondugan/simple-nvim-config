@@ -51,7 +51,7 @@ return {
     },
   },
 
-  { -- Auto-Save buffers
+  { -- AutoSave buffers
     'Pocco81/auto-save.nvim',
     event = 'InsertEnter',
     opts = {

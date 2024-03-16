@@ -4,6 +4,9 @@
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ','
 
+-- Set to false if you don't have
+vim.g.have_nerd_font = true
+
 -- [[ Setting options ]]
 -- See `:help vim.opt`
 -- NOTE: You can change these options as you wish!
@@ -71,5 +74,5 @@ vim.opt.scrolloff = 10
 -- Plugin Options
 vim.opt.termguicolors = true
 --vim.opt.t_Co = 256
-vim.opt.conceallevel = 2
+vim.opt.conceallevel = 1
 vim.opt.foldlevel = 90
