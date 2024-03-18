@@ -52,22 +52,18 @@ return {
   },
 
   { -- AutoSave buffers
-    'Pocco81/auto-save.nvim',
+    'tmillr/sos.nvim',
     event = 'InsertEnter',
     opts = {
-      condition = function(buf)
-        local fn = vim.fn
-        local ignoreFiletypes = { 'harpoon' }
-        local utils = require 'auto-save.utils.data'
-        if fn.getbufvar(buf, '&modifiable') == 1 and utils.not_in(fn.getbufvar(buf, '&filetype'), ignoreFiletypes) then
-          return true
-        end
-        return false
-      end,
-      debounce_delay = 3000, --milliseconds
+      enabled = true,
+      timeout = 5000, --ms
+      autowrite = true,
+      save_on_cmd = 'some',
+      save_on_bufleave = true,
+      save_on_focuslost = true,
     },
     keys = {
-      { '<leader>ta', '<cmd>ASToggle<CR>', desc = 'auto-save toggle' },
+      { '<leader>ta', '<cmd>SosToggle<CR>', desc = 'auto-save toggle' },
     },
   },
 

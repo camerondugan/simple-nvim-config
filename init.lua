@@ -21,6 +21,12 @@ vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n><cmd>ToggleTerm<CR>', { desc = 'Ex
 -- vim.keymap.set('n', '<up>', '<cmd>echo "Use k to move!!"<CR>')
 -- vim.keymap.set('n', '<down>', '<cmd>echo "Use j to move!!"<CR>')
 
+-- TIP: Disable insert-mode CTRL+w to not get stuck closing browser tabs later
+vim.keymap.set('i', '<C-w>', function()
+  vim.notify('Use ctrl-backspace a.k.a. <C-BS>', vim.log.levels.INFO, nil)
+end, { desc = 'No More Closing Browser Tabs by accident' })
+vim.keymap.set('i', '<C-BS>', '<C-w>', { desc = 'No More Closing Browser Tabs by accident' })
+
 -- Keybinds to make split navigation easier.
 --  Use CTRL+<hjkl> to switch between windows
 --
