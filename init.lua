@@ -71,7 +71,10 @@ vim.opt.rtp:prepend(lazypath)
 --
 --  To update plugins, you can run
 --    :Lazy update
---
+
+-- first: make vim load lua modules faster
+vim.loader.enable()
+
 require('lazy').setup {
   'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
 
@@ -636,7 +639,7 @@ require('lazy').setup {
       vim.cmd.colorscheme 'catppuccin-mocha'
 
       -- You can configure highlights by doing something like
-      vim.cmd.hi 'Comment gui=none'
+      -- vim.cmd.hi 'Comment gui=none'
     end,
   },
 

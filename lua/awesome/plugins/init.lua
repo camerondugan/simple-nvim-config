@@ -29,6 +29,7 @@ return {
       },
     },
   },
+
   { --Toggle Terminal
     'akinsho/toggleterm.nvim',
     opts = {},
@@ -56,7 +57,7 @@ return {
     event = 'InsertEnter',
     opts = {
       enabled = true,
-      timeout = 5000, --ms
+      timeout = 2000, --ms
       autowrite = true,
       save_on_cmd = 'some',
       save_on_bufleave = true,
@@ -119,20 +120,18 @@ return {
     end,
   },
 
-  -- Refactoring (fast multi-lang Refactor command)
-  {
+  { -- Refactoring (fast multi-lang Refactor command)
     'ThePrimeagen/refactoring.nvim',
     dependencies = {
       'nvim-lua/plenary.nvim',
       'nvim-treesitter/nvim-treesitter',
     },
-    config = function()
-      require('refactoring').setup()
+    config = function(opts)
+      require('refactoring').setup(opts)
     end,
   },
 
-  -- Neorg config (note taking setup)
-  {
+  { -- Neorg config (note taking setup)
     'nvim-neorg/neorg',
     build = ':Neorg sync-parsers',
     dependencies = {
@@ -182,8 +181,7 @@ return {
     },
   },
 
-  -- Markdown Preview
-  {
+  { -- Markdown Preview
     'iamcco/markdown-preview.nvim',
     cmd = { 'MarkdownPreviewToggle', 'MarkdownPreview', 'MarkdownPreviewStop' },
     ft = { 'markdown' },
@@ -192,8 +190,7 @@ return {
     end,
   },
 
-  -- Git plugins
-  {
+  { -- Git plugins
     'kdheepak/lazygit.nvim',
     cmd = { --which cmds load lazygit plugin
       'LazyGit',
@@ -206,5 +203,10 @@ return {
     dependencies = {
       'nvim-lua/plenary.nvim',
     },
+  },
+
+  { -- Transparent-Nvim
+    'xiyaowong/transparent.nvim',
+    lazy = false,
   },
 }
