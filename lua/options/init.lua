@@ -29,6 +29,9 @@ vim.opt.showmode = false
 --  See `:help 'clipboard'`
 vim.opt.clipboard = 'unnamedplus'
 
+-- Confirm on :q and :e instead of not allowing
+vim.opt.confirm = true
+
 -- Enable break indent
 vim.opt.breakindent = true
 
