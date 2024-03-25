@@ -59,9 +59,9 @@ return {
       enabled = true,
       timeout = 2000, --ms
       autowrite = true,
-      save_on_cmd = 'some',
-      save_on_bufleave = true,
-      save_on_focuslost = true,
+      save_on_cmd = false,
+      save_on_bufleave = false,
+      save_on_focuslost = false,
     },
     keys = {
       { '<leader>ta', '<cmd>SosToggle<CR>', desc = 'auto-save toggle' },
@@ -87,7 +87,6 @@ return {
     branch = 'harpoon2',
     dependencies = { 'nvim-lua/plenary.nvim', 'nvim-telescope/telescope.nvim' },
     config = function()
-      -- Harpoon with telescope
       local harpoon = require 'harpoon'
       harpoon:setup()
 
