@@ -1,7 +1,3 @@
--- You can add your own plugins here or in other files in this directory!
---  I promise not to create any merge conflicts in this directory :)
---
--- See the kickstart.nvim README for more information
 return {
   { --File Explorer
     'nvim-neo-tree/neo-tree.nvim',
@@ -52,7 +48,7 @@ return {
     },
   },
 
-  { -- AutoSave buffers
+  { -- Auto-Save buffers
     'tmillr/sos.nvim',
     event = 'InsertEnter',
     opts = {
@@ -82,13 +78,13 @@ return {
     opts = {},
   },
 
-  { -- Harpoon2 (fast buffer change)
+  { -- Harpoon 2 (fast buffer change)
     'ThePrimeagen/harpoon',
     branch = 'harpoon2',
     dependencies = { 'nvim-lua/plenary.nvim', 'nvim-telescope/telescope.nvim' },
     config = function()
       local harpoon = require 'harpoon'
-      harpoon:setup()
+      harpoon:setup {}
 
       vim.keymap.set('n', '<leader>a', function()
         harpoon:list():append()
@@ -197,7 +193,7 @@ return {
 
   { -- Git plugins
     'kdheepak/lazygit.nvim',
-    cmd = { --which cmds load lazygit plugin
+    cmd = { --which commands load lazygit plugin
       'LazyGit',
       'LazyGitConfig',
       'LazyGitCurrentFile',

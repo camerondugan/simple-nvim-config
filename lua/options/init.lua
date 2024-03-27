@@ -35,6 +35,10 @@ vim.opt.confirm = true
 -- Enable break indent
 vim.opt.breakindent = true
 
+-- Enable Spell Check
+vim.opt.spelllang = 'en_us'
+vim.opt.spell = true
+
 -- Enable wrap by word
 vim.opt.linebreak = true
 
@@ -45,7 +49,7 @@ vim.opt.undofile = true
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
 
--- Keep signcolumn on by default
+-- Keep sign column on by default
 vim.opt.signcolumn = 'yes'
 
 -- Decrease update time
@@ -56,7 +60,7 @@ vim.opt.timeoutlen = 300
 vim.opt.splitright = true
 vim.opt.splitbelow = true
 
--- Sets how neovim will display certain whitespace in the editor.
+-- Sets how Neovim will display certain white-space in the editor.
 --  See `:help 'list'`
 --  and `:help 'listchars'`
 vim.opt.list = true
