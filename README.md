@@ -1,4 +1,4 @@
-# My Incredibly Simple Neovim Config
+# My Simple Neovim Config
 
 ## Goals
 
@@ -8,30 +8,25 @@
 
 ## Setup
 
-This will move your current config to ~/.config/nvim.bak and will then install this config in its place
+This will move your current config to ~/.config/nvim.bak and will then install
+this config in its place
 
 ```bash
 mv ~/.config/nvim ~/.config/nvim.bak
 git clone https://github.com/camerondugan/simple-nvim-config.git ~/.config/nvim
 ```
 
-Warning: Do not press these keybindings all at once, press in order (not necessary to release before next key)
-
 ## Programming Workflow
 
+Warning: Do not press these keybindings all at once, press in order
+
 - Find Directory: space z (launches telescope Zoxide list)
-- Find File (current directory and not in .gitignore): space sf (launches telescope for files)
+- Find File (current directory and not in .gitignore): space sf
 - Copy/Paste/Delete/Rename many files: space f (launches floating Neotree)
-
-## Note-taking Workflow: (Neorg)
-
-<https://github.com/nvim-neorg/neorg>
-
-- Show Neorg index: space n enter (runs :Neorg command then selects index)
 
 ## Buffer Switching
 
-- Telescope open buffers: space space
+- Switch to another open buffer: space space
 
 ### Harpoon
 
@@ -41,3 +36,9 @@ Warning: Do not press these keybindings all at once, press in order (not necessa
 - Jump to second file: control j
 - Jump to third file: control k
 - Jump to fourth file: control l
+
+## Note-taking Workflow: (Neorg)
+
+<https://github.com/nvim-neorg/neorg>
+
+- Show Neorg index: , n i (runs :Neorg index)
