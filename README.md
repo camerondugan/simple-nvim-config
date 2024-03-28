@@ -1,11 +1,12 @@
 # My Incredibly Simple Neovim Config
 
-## Goals:
+## Goals
+
 1. Editing without being slowed down
 1. Small size for simplicity in configuration
 1. Easily adaptable by others
 
-## Setup:
+## Setup
 
 This will move your current config to ~/.config/nvim.bak and will then install this config in its place
 
@@ -16,27 +17,27 @@ git clone https://github.com/camerondugan/simple-nvim-config.git ~/.config/nvim
 
 Warning: Do not press these keybindings all at once, press in order (not necessary to release before next key)
 
-## Programming Workflow:
+## Programming Workflow
 
-* Find Directory: space sd (launches telescope zoxide list)
-* Find File (current directory): space sf (launches telescope for files)
-* Copy/Paste/Delete/Rename many files: space f (launches floating Neotree)
+- Find Directory: space z (launches telescope Zoxide list)
+- Find File (current directory and not in .gitignore): space sf (launches telescope for files)
+- Copy/Paste/Delete/Rename many files: space f (launches floating Neotree)
 
 ## Note-taking Workflow: (Neorg)
 
 <https://github.com/nvim-neorg/neorg>
 
-* Show Neorg index: space n enter (runs :Neorg command then selects index)
+- Show Neorg index: space n enter (runs :Neorg command then selects index)
 
-## Buffer Switching:
+## Buffer Switching
 
-* Telescope open buffers: space space
+- Telescope open buffers: space space
 
-### Harpoon:
+### Harpoon
 
-* Edit Harpoon List: control e
-* Add current file to list: space a
-* Jump to first file: control h
-* Jump to second file: control j
-* Jump to third file: control k
-* Jump to fourth file: control l
+- Edit Harpoon List: control e
+- Add current file to list: space a
+- Jump to first file: control h
+- Jump to second file: control j
+- Jump to third file: control k
+- Jump to fourth file: control l
