@@ -53,7 +53,7 @@ return {
     event = 'InsertEnter',
     opts = {
       enabled = true,
-      timeout = 2000, --ms
+      timeout = 10000, --ms
       autowrite = true,
       save_on_cmd = false,
       save_on_bufleave = false,
