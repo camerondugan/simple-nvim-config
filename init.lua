@@ -188,7 +188,6 @@ require('lazy').setup {
       -- This opens a window that shows you all of the keymaps for the current
       -- Telescope picker. This is really useful to discover what Telescope can
       -- do as well as how to actually do it!
-      --
 
       -- local z_utils = require 'telescope._extensions.zoxide.utils'
 

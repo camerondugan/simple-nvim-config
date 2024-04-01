@@ -73,6 +73,14 @@ return {
     opts = {},
   },
 
+  {
+    'blumaa/ohne-accidents',
+    config = function()
+      require('ohne-accidents').setup()
+      vim.api.nvim_set_keymap('n', '<leader>oh', ':OhneAccidents<CR>', { noremap = true, silent = true })
+    end,
+  },
+
   { -- Highlight colors
     'brenoprata10/nvim-highlight-colors',
     opts = {},
@@ -118,9 +126,11 @@ return {
   { -- Show where you are in a top bar
     'nvim-treesitter/nvim-treesitter-context',
     dependencies = { 'nvim-treesitter/nvim-treesitter' },
-    config = function()
-      require('treesitter-context').setup()
-    end,
+    opts = {
+      enable = true,
+      max_lines = 9,
+      multiline_threshold = 1,
+    },
   },
 
   { -- Refactoring (fast multi-lang Refactor command)
