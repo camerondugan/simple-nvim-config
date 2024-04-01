@@ -26,6 +26,8 @@ vim.keymap.set('i', '<C-w>', function()
   vim.notify('Use ctrl-backspace a.k.a. <C-BS>', vim.log.levels.INFO, nil)
 end, { desc = 'No More Closing Browser Tabs by accident' })
 vim.keymap.set('i', '<C-BS>', '<C-w>', { desc = 'No More Closing Browser Tabs by accident' })
+vim.keymap.set('i', '<C-h>', '<C-w>', { desc = 'No More Closing Browser Tabs by accident' })
+vim.keymap.set('i', '<M-BS>', '<C-w>', { desc = 'No More Closing Browser Tabs by accident' })
 
 -- Keybinds to make split navigation easier.
 --  Use CTRL+<hjkl> to switch between windows
