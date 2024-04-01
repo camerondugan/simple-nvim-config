@@ -32,12 +32,12 @@ return {
     keys = {
       {
         '<leader>tt',
-        '<cmd>ToggleTerm<CR><cmd>startinsert<CR>',
+        '<cmd>ToggleTerm<CR><cmd>startinsert<CR><cmd>setlocal nospell<CR>',
         desc = 'ToggleTerm',
       },
       {
         '<leader>tl',
-        '<cmd>ToggleTerm direction=vertical size=50<CR><cmd>startinsert<CR>',
+        '<cmd>ToggleTerm direction=vertical size=50<CR><cmd>startinsert<CR><cmd>setlocal nospell<CR>',
         desc = 'ToggleTerm right',
       },
       {
@@ -115,6 +115,14 @@ return {
     end,
   },
 
+  { -- Show where you are in a top bar
+    'nvim-treesitter/nvim-treesitter-context',
+    dependencies = { 'nvim-treesitter/nvim-treesitter' },
+    config = function()
+      require('treesitter-context').setup()
+    end,
+  },
+
   { -- Refactoring (fast multi-lang Refactor command)
     'ThePrimeagen/refactoring.nvim',
     dependencies = {
@@ -136,7 +144,7 @@ return {
     event = 'VeryLazy',
     opts = {
       load = {
-        ['core.defaults'] = {}, -- Loads default behaviour
+        ['core.defaults'] = {}, -- Loadds default behaviour
         ['core.concealer'] = {}, -- Adds pretty icons to your documents
         ['core.keybinds'] = {}, -- Adds default keybindings
         ['core.summary'] = {}, -- Adds generate-workspace-summary

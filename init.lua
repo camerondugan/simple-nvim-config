@@ -570,6 +570,11 @@ require('lazy').setup {
       'hrsh7th/cmp-nvim-lsp',
       'hrsh7th/cmp-path',
 
+      { -- RipGrep Completion
+        'lukas-reineke/cmp-rg',
+        opt = {},
+      },
+
       -- If you want to add a bunch of pre-configured snippets,
       --    you can use this plugin to help you. It even has snippets
       --    for various frameworks/libraries/etc. but you will have to
@@ -644,6 +649,7 @@ require('lazy').setup {
           { name = 'nvim_lsp' },
           { name = 'luasnip' },
           { name = 'path' },
+          { name = 'rg', keyword_length = 2 },
         },
       }
     end,
