@@ -10,6 +10,15 @@ return {
       -- instead set linters_by_ft like this:
       lint.linters_by_ft = lint.linters_by_ft or {}
       lint.linters_by_ft['markdown'] = { 'markdownlint' }
+      lint.linters_by_ft['markdown'] = { 'write_good' }
+      lint.linters_by_ft['python'] = { 'pylint' }
+      lint.linters_by_ft['go'] = { 'golangcilint' }
+      lint.linters_by_ft['javascript'] = { 'quick-lint-js' }
+      lint.linters_by_ft['yaml'] = { 'yamllint' }
+      lint.linters_by_ft['json'] = { 'jsonlint' }
+      lint.linters_by_ft['shell'] = { 'shellcheck' }
+      lint.linters_by_ft['shell'] = { 'shellharden' }
+      lint.linters_by_ft['nix'] = { 'nix' }
 
       -- However, note that this will enable a set of default linters,
       -- which will cause errors unless these tools are available:

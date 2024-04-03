@@ -243,7 +243,8 @@ require('lazy').setup {
       local extensions = require('telescope').extensions
       vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = 'Search Help' })
       vim.keymap.set('n', '<leader>sk', builtin.keymaps, { desc = 'Search Keymaps' })
-      vim.keymap.set('n', '<leader>sf', builtin.find_files, { desc = 'Search Files' })
+      vim.keymap.set('n', '<leader>sf', builtin.git_files, { desc = 'Search Git Files' })
+      vim.keymap.set('n', '<leader>sa', builtin.find_files, { desc = 'Search All Files' })
       vim.keymap.set('n', '<leader>ss', builtin.builtin, { desc = 'Search Select Telescope' })
       vim.keymap.set('n', '<leader>sw', builtin.grep_string, { desc = 'Search current Word' })
       vim.keymap.set('n', '<leader>sg', builtin.live_grep, { desc = 'Search by Grep' })
@@ -484,10 +485,12 @@ require('lazy').setup {
         'java-test',
         'dockerfile-language-server',
         -- linters
+        'pylint',
         'golangci-lint',
         'markdownlint',
         'quick-lint-js', -- javascript
         'yamllint', -- yaml
+        'jsonlint', -- json
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
