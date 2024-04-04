@@ -145,6 +145,11 @@ return {
     },
     config = function(opts)
       require('refactoring').setup(opts)
+      vim.keymap.set('x', '<leader>re', '<cmd>Refactor extract<CR>')
+      vim.keymap.set('x', '<leader>rf', '<cmd>Refactor extract_to_file<CR>')
+      vim.keymap.set('x', '<leader>rv', '<cmd>Refactor extract_var<CR>')
+      vim.keymap.set({ 'n', 'x' }, '<leader>ri', '<cmd>Refactor inline_var<CR>')
+      vim.keymap.set('n', '<leader>rI', '<cmd>Refactor inline_func<CR>')
     end,
   },
 

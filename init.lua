@@ -124,10 +124,12 @@ require('lazy').setup {
     'folke/which-key.nvim',
     event = 'VimEnter', -- Sets the loading event to 'VimEnter'
     config = function() -- This is the function that runs, AFTER loading
-      require('which-key').setup()
+      local wk = require 'which-key'
+      wk.setup()
 
       -- Document existing key chains
-      require('which-key').register {
+      -- Normal Mode
+      wk.register {
         ['<leader>c'] = { name = 'Code', _ = 'which_key_ignore' },
         ['<leader>d'] = { name = 'Document', _ = 'which_key_ignore' },
         ['<leader>g'] = { name = 'Git', _ = 'which_key_ignore' },
@@ -136,6 +138,12 @@ require('lazy').setup {
         ['<leader>t'] = { name = 'Toggle', _ = 'which_key_ignore' },
         ['<leader>w'] = { name = 'Workspace', _ = 'which_key_ignore' },
       }
+      -- Select Mode
+      wk.register({
+        ['<leader>r'] = { name = 'Refactor', _ = 'which_key_ignore' },
+      }, {
+        mode = 'x',
+      })
     end,
   },
 
