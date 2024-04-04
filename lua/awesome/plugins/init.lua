@@ -89,16 +89,20 @@ return {
   { -- Harpoon 2 (fast buffer change)
     'ThePrimeagen/harpoon',
     branch = 'harpoon2',
-    dependencies = { 'nvim-lua/plenary.nvim', 'nvim-telescope/telescope.nvim' },
+    dependencies = { 'nvim-lua/plenary.nvim' },
     config = function()
       local harpoon = require 'harpoon'
       harpoon:setup {}
 
       vim.keymap.set('n', '<leader>a', function()
-        harpoon:list():append()
+        harpoon:list():add()
       end, { desc = 'Harpoon2 add' })
       vim.keymap.set('n', '<C-e>', function()
-        harpoon.ui:toggle_quick_menu(harpoon:list())
+        local toggle_opts = {
+          border = 'rounded',
+          title_pos = 'center',
+        }
+        harpoon.ui:toggle_quick_menu(harpoon:list(), toggle_opts)
       end)
       vim.keymap.set('n', '<C-h>', function()
         harpoon:list():select(1)
@@ -144,54 +148,16 @@ return {
     end,
   },
 
-  { -- Neorg config (note taking setup)
-    'nvim-neorg/neorg',
-    build = ':Neorg sync-parsers',
-    dependencies = {
-      'nvim-lua/plenary.nvim',
-      'nvim-neorg/neorg-telescope',
-    },
+  {
+    'nvim-orgmode/orgmode',
     event = 'VeryLazy',
-    opts = {
-      load = {
-        ['core.defaults'] = {}, -- Loadds default behaviour
-        ['core.concealer'] = {}, -- Adds pretty icons to your documents
-        ['core.keybinds'] = {}, -- Adds default keybindings
-        ['core.summary'] = {}, -- Adds generate-workspace-summary
-        -- ['core.ui.calendar'] = {}, -- Available in nvim 0.10.0+
-        ['core.completion'] = {
-          config = {
-            engine = 'nvim-cmp',
-          },
-        }, -- Enables support for completion plugins
-        ['core.journal'] = {}, -- Enables support for the journal module
-        ['core.dirman'] = { -- Manages Neorg workspaces
-          config = {
-            workspaces = {
-              notes = '~/Notes',
-            },
-            default_workspace = 'notes',
-          },
-        },
-      },
-    },
-    keys = {
-      {
-        '<leader>n',
-        '<cmd>Neorg<CR>',
-        desc = 'Neorg commands',
-      },
-      {
-        '<leader>sN',
-        '<cmd>Telescope neorg find_linkable<CR>',
-        desc = 'Search Neorg',
-      },
-      {
-        '<localleader>ni',
-        '<cmd>Neorg index<CR>',
-        desc = 'Neorg index',
-      },
-    },
+    config = function()
+      -- Setup orgmode
+      require('orgmode').setup {
+        org_agenda_files = '~/Notes/**/*',
+        org_default_notes_file = '~/Notes/index.norg',
+      }
+    end,
   },
 
   { -- Markdown Preview

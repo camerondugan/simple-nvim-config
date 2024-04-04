@@ -83,3 +83,6 @@ vim.opt.termguicolors = true
 --vim.opt.t_Co = 256
 vim.opt.conceallevel = 1
 vim.opt.foldlevel = 90
+
+--Alter file type
+vim.filetype.add { extension = { norg = 'org' } }

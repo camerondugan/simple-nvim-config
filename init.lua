@@ -205,11 +205,11 @@ require('lazy').setup {
         --   },
         -- },
 
-        pickers = {
-          find_files = {
-            no_ignore = true,
-          },
-        },
+        -- pickers = {
+        --   find_files = {
+        --     no_ignore = true,
+        --   },
+        -- },
         extensions = {
           ['ui-select'] = {
             require('telescope.themes').get_dropdown(),
@@ -243,7 +243,8 @@ require('lazy').setup {
       local extensions = require('telescope').extensions
       vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = 'Search Help' })
       vim.keymap.set('n', '<leader>sk', builtin.keymaps, { desc = 'Search Keymaps' })
-      vim.keymap.set('n', '<leader>sf', builtin.git_files, { desc = 'Search Git Files' })
+      vim.keymap.set('n', '<leader>sf', builtin.find_files, { desc = 'Search Git Files' })
+      vim.keymap.set('n', '<leader>sF', builtin.git_files, { desc = 'Search Git Files' })
       vim.keymap.set('n', '<leader>sa', builtin.find_files, { desc = 'Search All Files' })
       vim.keymap.set('n', '<leader>ss', builtin.builtin, { desc = 'Search Select Telescope' })
       vim.keymap.set('n', '<leader>sw', builtin.grep_string, { desc = 'Search current Word' })
@@ -422,18 +423,15 @@ require('lazy').setup {
         docker_compose_language_service = {},
         gopls = {},
         gradle_ls = {},
-        jdtls = {}, --java lsp
+        jdtls = {}, -- java LSP
         jsonls = {},
-        lemminx = {}, --xml
+        lemminx = {}, -- XML
         luacheck = {},
         nil_ls = {},
         omnisharp = {},
         omnisharp_mono = {},
         pyright = {},
         rust_analyzer = {},
-        shellcheck = {},
-        shellharden = {},
-        theme_check = {}, -- shopify
         taplo = {},
         -- Some languages (like typescript) have entire language plugins that can be useful:
         --    https://github.com/pmizio/typescript-tools.nvim
@@ -468,10 +466,11 @@ require('lazy').setup {
       -- for you, so that they are available from within Neovim.
       local ensure_installed = vim.tbl_keys(servers or {})
       vim.list_extend(ensure_installed, {
-        'stylua', -- Used to format lua code
+        -- formatters
+        'stylua', -- Used to format Lua code
         'asmfmt',
         'autopep8',
-        'black',
+        'black', -- python
         'clang-format',
         'gdtoolkit',
         'gofumpt',
@@ -485,12 +484,13 @@ require('lazy').setup {
         'java-test',
         'dockerfile-language-server',
         -- linters
-        'pylint',
+        'pylint', -- python
         'golangci-lint',
         'markdownlint',
         'quick-lint-js', -- javascript
         'yamllint', -- yaml
         'jsonlint', -- json
+        'hadolint', -- docker file
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
@@ -536,7 +536,6 @@ require('lazy').setup {
         lua = { 'stylua' },
         python = { 'isort', 'black' },
         text = {},
-        sh = { 'shellharden', 'shellcheck' },
         ['*'] = { 'codespell' },
         ['_'] = { 'trim_whitespace' },
       },
@@ -579,10 +578,8 @@ require('lazy').setup {
       'hrsh7th/cmp-nvim-lsp',
       'hrsh7th/cmp-path',
 
-      { -- RipGrep Completion
-        'lukas-reineke/cmp-rg',
-        opt = {},
-      },
+      -- RipGrep Completion
+      'lukas-reineke/cmp-rg',
 
       -- If you want to add a bunch of pre-configured snippets,
       --    you can use this plugin to help you. It even has snippets
@@ -656,6 +653,7 @@ require('lazy').setup {
         },
         sources = {
           { name = 'nvim_lsp' },
+          { name = 'orgmode' },
           { name = 'luasnip' },
           { name = 'path' },
           { name = 'rg', keyword_length = 2 },
