@@ -1,3 +1,4 @@
+-- luacheck: ignore 113 -- ignores undefined vim var
 require 'options'
 require 'keys'
 require 'autocommands'
@@ -12,17 +13,11 @@ end ---@diagnostic disable-next-line: undefined-field
 vim.opt.rtp:prepend(lazypath)
 
 -- [[ Configure and install plugins ]]
---
 --  To check the current status of your plugins, run
 --    :Lazy
---
 --  You can press `?` in this menu for help. Use `:q` to close the window
---
 --  To update plugins you can run
 --    :Lazy update
-
--- first: make vim load lua modules faster
-vim.loader.enable()
 
 require('lazy').setup {
   'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
@@ -51,21 +46,6 @@ require('lazy').setup {
       },
     },
   },
-
-  -- Plugins can also be configured to run lua code when they are loaded.
-  --
-  -- This is often very useful to both group configuration, as well as handle
-  -- lazy loading plugins that don't need to be loaded immediately at startup.
-  --
-  -- For example, in the following configuration, we use:
-  --  event = 'VimEnter'
-  --
-  -- which loads which-key before all the UI elements are loaded. Events can be
-  -- normal autocommands events (`:help autocmd-events`).
-  --
-  -- Then, because we use the `config` key, the configuration only runs
-  -- after the plugin has been loaded:
-  --  config = function() ... end
 
   { -- Useful plugin to show you pending keybinds.
     'folke/which-key.nvim',
@@ -551,6 +531,7 @@ require('lazy').setup {
       require('luasnip.loaders.from_snipmate').lazy_load()
       require('luasnip.loaders.from_lua').lazy_load()
       luasnip.filetype_extend('text', { 'license' })
+      luasnip.filetype_extend('md', { 'license' })
 
       cmp.setup {
         snippet = {

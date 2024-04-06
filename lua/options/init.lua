@@ -1,3 +1,4 @@
+-- luacheck: ignore 113 -- ignores undefined vim var
 -- Set <space> as the leader key
 -- See `:help mapleader`
 --  NOTE: Must happen before plugins are loaded (otherwise wrong leader will be used)
@@ -80,9 +81,9 @@ vim.opt.scrolloff = 10
 
 -- Plugin Options
 vim.opt.termguicolors = true
---vim.opt.t_Co = 256
-vim.opt.conceallevel = 1
-vim.opt.foldlevel = 90
 
---Alter file type
+-- first: make vim load lua modules faster
+vim.loader.enable()
+
+--Alter file types
 vim.filetype.add { extension = { norg = 'org' } }

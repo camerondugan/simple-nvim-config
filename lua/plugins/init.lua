@@ -1,3 +1,4 @@
+-- luacheck: ignore 113 -- ignores undefined vim var
 return {
   { --File Explorer
     'nvim-neo-tree/neo-tree.nvim',

@@ -1,3 +1,4 @@
+-- luacheck: ignore 113 -- ignores undefined vim var
 return {
 
   { -- Linting
@@ -19,6 +20,7 @@ return {
       lint.linters_by_ft['shell'] = { 'shellcheck', 'shellharden' }
       lint.linters_by_ft['nix'] = { 'nix' }
       lint.linters_by_ft['dockerfile'] = { 'hadolint' }
+      lint.linters_by_ft['lua'] = { 'luacheck' }
 
       -- Create auto command which carries out the actual linting
       -- on the specified events.
