@@ -19,6 +19,9 @@ vim.opt.number = true
 --  Experiment for yourself to see if you like it!
 vim.opt.relativenumber = true
 
+-- Syntax
+vim.opt.syntax = 'on'
+
 -- Enable mouse mode, can be useful for resizing splits for example!
 vim.opt.mouse = 'a'
 
@@ -69,6 +72,10 @@ vim.opt.listchars = { tab = '| ', trail = '·', nbsp = '␣' }
 
 -- Tab size options
 vim.opt.tabstop = 4 -- max tab size
+vim.opt.shiftwidth = 4
+vim.opt.softtabstop = 4
+vim.opt.autoindent = true
+vim.opt.smartindent = true
 
 -- Preview substitutions live, as you type!
 vim.opt.inccommand = 'split'

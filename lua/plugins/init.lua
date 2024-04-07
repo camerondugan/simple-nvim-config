@@ -21,7 +21,7 @@ return {
     keys = {
       {
         '<leader>f',
-        '<cmd>Neotree toggle float<CR>',
+        '<cmd>Neotree toggle float<cr>',
         desc = 'File Explorer',
       },
     },
@@ -33,17 +33,17 @@ return {
     keys = {
       {
         '<leader>tt',
-        '<cmd>ToggleTerm<CR><cmd>startinsert<CR><cmd>setlocal nospell<CR>',
+        '<cmd>ToggleTerm<cr><cmd>startinsert<cr><cmd>setlocal nospell<cr>',
         desc = 'ToggleTerm',
       },
       {
         '<leader>tl',
-        '<cmd>ToggleTerm direction=vertical size=50<CR><cmd>startinsert<CR><cmd>setlocal nospell<CR>',
+        '<cmd>ToggleTerm direction=vertical size=50<cr><cmd>startinsert<cr><cmd>setlocal nospell<cr>',
         desc = 'ToggleTerm right',
       },
       {
         '<leader>ts',
-        '<cmd>ToggleTermSendVisualSelection<CR>',
+        '<cmd>ToggleTermSendVisualSelection<cr>',
         desc = 'ToggleTerm send selection',
       },
     },
@@ -61,7 +61,7 @@ return {
       save_on_focuslost = false,
     },
     keys = {
-      { '<leader>ta', '<cmd>SosToggle<CR>', desc = 'auto-save toggle' },
+      { '<leader>ta', '<cmd>SosToggle<cr>', desc = 'auto-save toggle' },
     },
   },
 
@@ -78,7 +78,7 @@ return {
     'blumaa/ohne-accidents',
     config = function()
       require('ohne-accidents').setup { welcomeOnStartup = false }
-      vim.api.nvim_set_keymap('n', '<leader>oh', ':OhneAccidents<CR>', { noremap = true, silent = true })
+      vim.api.nvim_set_keymap('n', '<leader>oh', ':OhneAccidents<cr>', { noremap = true, silent = true })
     end,
   },
 
@@ -146,11 +146,11 @@ return {
     },
     config = function(opts)
       require('refactoring').setup(opts)
-      vim.keymap.set('x', '<leader>re', '<cmd>Refactor extract<CR>')
-      vim.keymap.set('x', '<leader>rf', '<cmd>Refactor extract_to_file<CR>')
-      vim.keymap.set('x', '<leader>rv', '<cmd>Refactor extract_var<CR>')
-      vim.keymap.set({ 'n', 'x' }, '<leader>ri', '<cmd>Refactor inline_var<CR>')
-      vim.keymap.set('n', '<leader>rI', '<cmd>Refactor inline_func<CR>')
+      vim.keymap.set('x', '<leader>re', '<cmd>Refactor extract<cr>')
+      vim.keymap.set('x', '<leader>rf', '<cmd>Refactor extract_to_file<cr>')
+      vim.keymap.set('x', '<leader>rv', '<cmd>Refactor extract_var<cr>')
+      vim.keymap.set({ 'n', 'x' }, '<leader>ri', '<cmd>Refactor inline_var<cr>')
+      vim.keymap.set('n', '<leader>rI', '<cmd>Refactor inline_func<cr>')
     end,
   },
 
@@ -175,7 +175,7 @@ return {
     keys = {
       {
         '<leader>pm',
-        '<cmd>MarkdownPreviewToggle<CR>',
+        '<cmd>MarkdownPreviewToggle<cr>',
         desc = 'Markdown',
       },
     },
