@@ -160,8 +160,8 @@ return {
     config = function()
       -- Setup orgmode
       require('orgmode').setup {
-        org_agenda_files = '~/Notes/**/*',
-        org_default_notes_file = '~/Notes/index.norg',
+        org_agenda_files = '~/Notes/**',
+        org_default_notes_file = '~/Notes/index.org',
       }
     end,
   },
