@@ -418,7 +418,7 @@ require('lazy').setup {
     end,
   },
 
-  { -- Autoformat
+  { -- Auto format
     'stevearc/conform.nvim',
     lazy = false,
     opts = {
@@ -439,7 +439,7 @@ require('lazy').setup {
         java = { 'clang-format' },
         protobuf = { 'clang-format' },
         json = { 'clang-format' },
-        bash = { 'shellharden' },
+        sh = { 'shellharden', 'shfmt' },
         text = {},
         ['*'] = { 'trim_whitespace', 'codespell' },
       },

@@ -17,7 +17,7 @@ return {
       lint.linters_by_ft['javascript'] = { 'quick-lint-js' }
       lint.linters_by_ft['yaml'] = { 'yamllint' }
       lint.linters_by_ft['json'] = { 'jsonlint' }
-      lint.linters_by_ft['shell'] = { 'shellcheck', 'shellharden' }
+      lint.linters_by_ft['sh'] = { 'shellcheck' }
       lint.linters_by_ft['nix'] = { 'nix' }
       lint.linters_by_ft['dockerfile'] = { 'hadolint' }
       lint.linters_by_ft['lua'] = { 'luacheck' }
