@@ -1,3 +1,4 @@
+-- luacheck: ignore 113 -- ignores undefined vim var
 --[[
 --
 -- This file is not required for your own configuration,
@@ -21,7 +22,7 @@ end
 
 local check_external_reqs = function()
   -- Basic utils: `git`, `make`, `unzip`
-  for _, exe in ipairs { 'git', 'make', 'unzip', 'rg', 'zoxide' } do
+  for _, exe in ipairs { 'git', 'make', 'unzip', 'rg', 'zoxide', 'npm', 'cargo' } do
     local is_executable = vim.fn.executable(exe) == 1
     if is_executable then
       vim.health.ok(string.format("Found executable: '%s'", exe))

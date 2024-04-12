@@ -382,7 +382,7 @@ require('lazy').setup {
         'black', -- python
         'clang-format',
         'gdtoolkit',
-        'gofumpt',
+        -- 'gofumpt',
         'goimports',
         'golines',
         'gomodifytags',
@@ -391,7 +391,6 @@ require('lazy').setup {
         'prettierd',
         'shfmt',
         'java-test',
-        'dockerfile-language-server',
         -- linters
         'pylint', -- python
         'golangci-lint',
@@ -431,14 +430,14 @@ require('lazy').setup {
         }
       end,
       formatters_by_ft = {
-        dockerfile = { 'dockerfile-language-server' },
-        go = { 'goimports', 'golines', 'gofumt' }, -- a then b then c
-        javascript = { { 'prettierd', 'prettier' } }, -- a or b
-        lua = { 'stylua' },
-        python = { 'isort', 'black' },
+        go = { 'goimports', 'golines', 'gofmt' }, -- a then b then c
         java = { 'clang-format' },
-        protobuf = { 'clang-format' },
+        javascript = { { 'prettierd', 'prettier' } }, -- a or b
         json = { 'clang-format' },
+        lua = { 'stylua' },
+        protobuf = { 'clang-format' },
+        python = { 'isort', 'black' },
+        rust = { 'rustfmt' },
         sh = { 'shellharden', 'shfmt' },
         text = {},
         ['*'] = { 'trim_whitespace', 'codespell' },
@@ -446,7 +445,7 @@ require('lazy').setup {
     },
   },
 
-  { -- Autocompletion
+  { -- Auto completion
     'hrsh7th/nvim-cmp',
     event = 'InsertEnter',
     dependencies = {

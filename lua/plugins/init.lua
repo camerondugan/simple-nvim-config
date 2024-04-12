@@ -196,8 +196,9 @@ return {
     },
   },
 
-  { -- Transparent-Nvim
-    'xiyaowong/transparent.nvim',
-    lazy = false,
+  { -- Flutter
+    'mskelton/flutter.nvim',
+    dependencies = { 'neovim/nvim-lspconfig' },
+    config = true,
   },
 }
