@@ -438,6 +438,7 @@ require('lazy').setup {
         protobuf = { 'clang-format' },
         python = { 'isort', 'black' },
         rust = { 'rustfmt' },
+        dart = { 'dart_format' },
         sh = { 'shellharden', 'shfmt' },
         text = {},
         ['*'] = { 'trim_whitespace', 'codespell' },
