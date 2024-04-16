@@ -90,10 +90,15 @@ return {
   { -- Harpoon 2 (fast buffer change)
     'ThePrimeagen/harpoon',
     branch = 'harpoon2',
+    commit = '3e32576', -- e76cb03 works
     dependencies = { 'nvim-lua/plenary.nvim' },
-    config = function()
+    opts = { settings = {
+      save_on_toggle = true,
+      save_on_ui_close = true,
+    } },
+    config = function(opts)
       local harpoon = require 'harpoon'
-      harpoon:setup {}
+      harpoon:setup { opts }
 
       vim.keymap.set('n', '<leader>a', function()
         harpoon:list():add()

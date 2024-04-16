@@ -1,3 +1,4 @@
+-- luacheck: ignore 113 -- ignores undefined vim var
 -- debug.lua
 --
 -- Shows how to use the DAP plugin to debug your code.
@@ -13,9 +14,6 @@ return {
   dependencies = {
     -- Creates a beautiful debugger UI
     'rcarriga/nvim-dap-ui',
-    -- Required for dap ui
-    'nvim-neotest/nvim-nio',
-
     -- Required dependency for nvim-dap-ui
     'nvim-neotest/nvim-nio',
 
@@ -34,6 +32,7 @@ return {
       -- Makes a best effort to setup the various debuggers with
       -- reasonable debug configurations
       automatic_setup = true,
+      automatic_installation = true,
 
       -- You can provide additional configuration to the handlers,
       -- see mason-nvim-dap README for more information
@@ -68,6 +67,8 @@ return {
       --    Don't feel like these are good choices.
       icons = { expanded = '▾', collapsed = '▸', current_frame = '*' },
       controls = {
+        enabled = true,
+        element = '*',
         icons = {
           pause = '⏸',
           play = '▶',
