@@ -11,6 +11,7 @@ return {
       lint.linters_by_ft = lint.linters_by_ft or {}
       lint.linters_by_ft['markdown'] = { 'markdownlint', 'write_good', 'proselint' }
       lint.linters_by_ft['text'] = { 'write_good', 'proselint' }
+      lint.linters_by_ft['org'] = { 'write_good', 'proselint' }
       lint.linters_by_ft['python'] = { 'pylint' }
       lint.linters_by_ft['go'] = { 'golangcilint' }
       lint.linters_by_ft['javascript'] = { 'quick-lint-js' }

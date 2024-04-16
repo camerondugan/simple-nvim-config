@@ -393,12 +393,14 @@ require('lazy').setup {
         'java-test',
         -- linters
         'pylint', -- python
-        'golangci-lint',
-        'markdownlint',
+        'golangci-lint', -- golang
+        'markdownlint', -- markdown
         'quick-lint-js', -- javascript
         'yamllint', -- yaml
         'jsonlint', -- json
         'hadolint', -- docker file
+        'write-good', -- English writing
+        'proselint',
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 

@@ -89,6 +89,9 @@ vim.opt.scrolloff = 10
 -- Plugin Options
 vim.opt.termguicolors = true
 
+-- Conceal some text (mainly for orgmode)
+vim.opt.conceallevel = 2
+
 -- first: make vim load lua modules faster
 vim.loader.enable()
 
