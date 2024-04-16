@@ -393,12 +393,14 @@ require('lazy').setup {
         'java-test',
         -- linters
         'pylint', -- python
-        'golangci-lint',
-        'markdownlint',
+        'golangci-lint', -- golang
+        'markdownlint', -- markdown
         'quick-lint-js', -- javascript
         'yamllint', -- yaml
         'jsonlint', -- json
         'hadolint', -- docker file
+        'write-good', -- English writing
+        'proselint',
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
@@ -612,7 +614,7 @@ require('lazy').setup {
 
   --  Uncomment any of the lines below to enable them (you will need to restart nvim).
   require 'kickstart.plugins.debug',
-  require 'kickstart.plugins.indent_line',
+  -- require 'kickstart.plugins.indent_line',
   require 'kickstart.plugins.lint',
 
   { import = 'plugins' },
