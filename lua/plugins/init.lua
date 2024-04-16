@@ -90,7 +90,7 @@ return {
   { -- Harpoon 2 (fast buffer change)
     'ThePrimeagen/harpoon',
     branch = 'harpoon2',
-    commit = '3e32576', -- e76cb03 works
+    commit = 'e76cb03',
     dependencies = { 'nvim-lua/plenary.nvim' },
     opts = { settings = {
       save_on_toggle = true,
