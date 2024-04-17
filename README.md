@@ -2,9 +2,9 @@
 
 ## Goals
 
-1. Editing without being slowed down
+1. Fast editing, easy shortcuts for important commands used often.
 1. Small size for simplicity in configuration
-1. Easily adaptable by others
+1. Adaptable by others
 
 ## Setup
 
@@ -20,13 +20,12 @@ git clone https://github.com/camerondugan/simple-nvim-config.git ~/.config/nvim
 
 Warning: Do not press these keybindings all at once, press in order
 
-- Find Directory: space z (launches telescope Zoxide list)
+- Find Directory: space z (launches telescope Zoxide)
+- ^^Alternate^^: *Ctrl* z (also launches telescope Zoxide)
 - Find File (current directory and not in .gitignore): space sf
-- Copy/Paste/Delete/Rename many files: space f (launches floating Neotree)
+- Copy/Paste/Delete/Rename files: space f (launches floating Neotree)
 
 ## Buffer Switching
-
-- Switch to another open buffer: space space
 
 ### Harpoon
 
@@ -37,8 +36,6 @@ Warning: Do not press these keybindings all at once, press in order
 - Jump to third file: control k
 - Jump to fourth file: control l
 
-## Note-taking Workflow: (Neorg)
+### Telescope
 
-<https://github.com/nvim-neorg/neorg>
-
-- Show Neorg index: , n i (runs :Neorg index)
+- Switch to another open buffer: space space
