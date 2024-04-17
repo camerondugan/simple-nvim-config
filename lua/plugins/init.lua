@@ -68,13 +68,20 @@ return {
   -- Zoxide (fast directory change)
   { 'nanotee/zoxide.vim', lazy = false },
 
-  { -- LuaLine (status line for nvim)
+  { -- hints to improve your vim motion usage
+    'm4xshen/hardtime.nvim',
+    event = 'InsertEnter',
+    dependencies = { 'MunifTanjim/nui.nvim', 'nvim-lua/plenary.nvim' },
+    opts = { restriction_mode = 'hint' },
+  },
+
+  { -- LuaLine (status line for Neovim)
     'nvim-lualine/lualine.nvim',
     dependencies = { 'nvim-tree/nvim-web-devicons' },
     opts = {},
   },
 
-  {
+  { -- Show how long it's been since you tweaked your config
     'blumaa/ohne-accidents',
     config = function()
       require('ohne-accidents').setup { welcomeOnStartup = false }
@@ -82,7 +89,7 @@ return {
     end,
   },
 
-  { -- Highlight colors
+  { -- Highlight colors from hex or other color codes
     'brenoprata10/nvim-highlight-colors',
     opts = {},
   },
@@ -133,7 +140,7 @@ return {
     end,
   },
 
-  { -- Show where you are in a top bar
+  { -- Shows what you are editing in the top bar if off screen
     'nvim-treesitter/nvim-treesitter-context',
     dependencies = { 'nvim-treesitter/nvim-treesitter' },
     opts = {
@@ -159,7 +166,7 @@ return {
     end,
   },
 
-  {
+  { -- Notes and organization
     'nvim-orgmode/orgmode',
     event = 'VeryLazy',
     config = function()
@@ -173,13 +180,18 @@ return {
 
   { -- Markdown Preview
     'iamcco/markdown-preview.nvim',
-    ft = { 'markdown' },
+    ft = { 'markdown' }, -- only loads in markdown files
     build = function()
       vim.fn['mkdp#util#install']()
     end,
-    keys = {
-      {
+    keys = { -- only load if these key binds are pressed
+      { -- preview markdown
         '<leader>pm',
+        '<cmd>MarkdownPreviewToggle<cr>',
+        desc = 'Markdown',
+      },
+      { -- markdown preview
+        '<leader>mp',
         '<cmd>MarkdownPreviewToggle<cr>',
         desc = 'Markdown',
       },
