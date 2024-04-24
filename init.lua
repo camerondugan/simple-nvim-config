@@ -402,6 +402,8 @@ require('lazy').setup {
         'hadolint', -- docker file
         'write-good', -- English writing
         'proselint',
+        'shellcheck',
+        'shellharden',
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
