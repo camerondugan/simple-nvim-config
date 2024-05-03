@@ -75,6 +75,12 @@ return {
     opts = {
       restriction_mode = 'hint',
       disable_mouse = false,
+      disabled_keys = { -- occasionally helpful to have arrows
+        ['<Up>'] = {},
+        ['<Down>'] = {},
+        ['<Left>'] = {},
+        ['<Right>'] = {},
+      },
     },
   },
 
