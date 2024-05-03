@@ -56,7 +56,7 @@ require('lazy').setup {
     end,
   },
 
-  { -- Fuzzy Finder (files, lsp, etc)
+  { -- Fuzzy Finder (files, LSP, etc)
     'nvim-telescope/telescope.nvim',
     event = 'VimEnter',
     branch = '0.1.x',
