@@ -9,12 +9,13 @@ return {
 
       -- Specify linters_by_ft
       lint.linters_by_ft = lint.linters_by_ft or {}
+      lint.linters_by_ft['html'] = { 'htmlhint' }
       lint.linters_by_ft['markdown'] = { 'markdownlint', 'write_good', 'proselint' }
       lint.linters_by_ft['text'] = { 'write_good', 'proselint' }
       lint.linters_by_ft['org'] = { 'write_good', 'proselint' }
       lint.linters_by_ft['python'] = { 'pylint' }
       lint.linters_by_ft['go'] = { 'golangcilint' }
-      lint.linters_by_ft['javascript'] = { 'quick-lint-js' }
+      lint.linters_by_ft['javascript'] = { 'quick-lint-js', 'standardjs' }
       lint.linters_by_ft['yaml'] = { 'yamllint' }
       lint.linters_by_ft['json'] = { 'jsonlint' }
       lint.linters_by_ft['sh'] = { 'shellcheck' }

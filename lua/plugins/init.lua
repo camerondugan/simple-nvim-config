@@ -72,7 +72,10 @@ return {
     'm4xshen/hardtime.nvim',
     event = 'InsertEnter',
     dependencies = { 'MunifTanjim/nui.nvim', 'nvim-lua/plenary.nvim' },
-    opts = { restriction_mode = 'hint' },
+    opts = {
+      restriction_mode = 'hint',
+      disable_mouse = false,
+    },
   },
 
   { -- LuaLine (status line for Neovim)
@@ -213,9 +216,15 @@ return {
     },
   },
 
+  -- Framework Specific Plugins
   { -- Flutter
     'mskelton/flutter.nvim',
     dependencies = { 'neovim/nvim-lspconfig' },
     config = true,
+  },
+  { --yorik1984/jekyll.nvim
+    'yorik1984/jekyll.nvim',
+    lazy = false,
+    opts = {},
   },
 }
