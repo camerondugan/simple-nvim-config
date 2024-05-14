@@ -393,6 +393,7 @@ require('lazy').setup {
         'shfmt',
         'java-test',
         -- linters
+        'htmlhint',
         'pylint', -- python
         'golangci-lint', -- golang
         'markdownlint', -- markdown

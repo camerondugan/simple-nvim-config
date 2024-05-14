@@ -222,9 +222,15 @@ return {
     },
   },
 
+  -- Framework Specific Plugins
   { -- Flutter
     'mskelton/flutter.nvim',
     dependencies = { 'neovim/nvim-lspconfig' },
     config = true,
+  },
+  { --yorik1984/jekyll.nvim
+    'yorik1984/jekyll.nvim',
+    lazy = false,
+    opts = {},
   },
 }
