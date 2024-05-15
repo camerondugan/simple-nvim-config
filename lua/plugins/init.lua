@@ -1,30 +1,23 @@
 -- luacheck: ignore 113 -- ignores undefined vim var
 return {
-  { --File Explorer
-    'nvim-neo-tree/neo-tree.nvim',
-    dependencies = {
-      'nvim-lua/plenary.nvim',
-      'nvim-tree/nvim-web-devicons',
-      'MunifTanjim/nui.nvim',
-      '3rd/image.nvim',
-    },
-    opts = {
-      event_handlers = {
-        {
-          event = 'neo_tree_buffer_enter',
-          handler = function(_)
-            vim.opt.relativenumber = true
-          end,
+  { -- File explorer
+    'stevearc/oil.nvim',
+    dependencies = { 'nvim-tree/nvim-web-devicons' },
+    config = function()
+      require('oil').setup {
+        columns = { 'icon' },
+        keymaps = {
+          ['<C-h}'] = false,
+          ['<M-h>'] = 'actions.select_split',
         },
-      },
-    },
-    keys = {
-      {
-        '<leader>f',
-        '<cmd>Neotree toggle float<cr>',
-        desc = 'File Explorer',
-      },
-    },
+        view_options = {
+          show_hidden = true,
+        },
+      }
+
+      -- Open parent folder in cur window
+      vim.keymap.set('n', '-', '<CMD>Oil<CR>', { desc = 'Open parent dir' })
+    end,
   },
 
   { --Toggle Terminal
