@@ -16,7 +16,7 @@ return {
       }
 
       -- Open parent folder in cur window
-      vim.keymap.set('n', '-', '<CMD>Oil<CR>', { desc = 'Open parent dir' })
+      vim.keymap.set('n', '-', '<cmd>Oil<cr>', { desc = 'Open parent dir' })
     end,
   },
 
@@ -25,19 +25,9 @@ return {
     opts = {},
     keys = {
       {
-        '<leader>tt',
+        '+',
         '<cmd>ToggleTerm<cr><cmd>startinsert<cr><cmd>setlocal nospell<cr>',
         desc = 'ToggleTerm',
-      },
-      {
-        '<leader>tl',
-        '<cmd>ToggleTerm direction=vertical size=50<cr><cmd>startinsert<cr><cmd>setlocal nospell<cr>',
-        desc = 'ToggleTerm right',
-      },
-      {
-        '<leader>ts',
-        '<cmd>ToggleTermSendVisualSelection<cr>',
-        desc = 'ToggleTerm send selection',
       },
     },
   },
@@ -68,7 +58,7 @@ return {
     opts = {
       restriction_mode = 'hint',
       disable_mouse = false,
-      disabled_keys = { -- occasionally helpful to have arrows
+      disabled_keys = { -- prevents disabled arrow keys
         ['<Up>'] = {},
         ['<Down>'] = {},
         ['<Left>'] = {},
@@ -176,6 +166,16 @@ return {
       require('orgmode').setup {
         org_agenda_files = '~/Notes/**',
         org_default_notes_file = '~/Notes/index.org',
+      }
+    end,
+  },
+
+  { -- Auto Session
+    'rmagatti/auto-session',
+    config = function()
+      require('auto-session').setup {
+        log_level = 'error',
+        auto_session_suppress_dirs = { '~/', '~/Downloads', '/' },
       }
     end,
   },

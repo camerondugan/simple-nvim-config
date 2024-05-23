@@ -46,6 +46,9 @@ require('lazy').setup {
         ['<leader>s'] = { name = 'Search', _ = 'which_key_ignore' },
         ['<leader>t'] = { name = 'Toggle', _ = 'which_key_ignore' },
         ['<leader>w'] = { name = 'Workspace', _ = 'which_key_ignore' },
+        ['<leader>o'] = { name = 'OrgMode', _ = 'which_key_ignore' },
+        ['<leader>m'] = { name = 'Markdown', _ = 'which_key_ignore' },
+        ['<leader>p'] = { name = 'Preview', _ = 'which_key_ignore' },
       }
       -- Select Mode
       wk.register({

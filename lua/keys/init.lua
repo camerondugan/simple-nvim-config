@@ -6,6 +6,9 @@
 vim.opt.hlsearch = true
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<cr>')
 
+-- Save file faster
+vim.keymap.set('n', '<C-s>', '<cmd>w<cr>')
+
 -- Diagnostic keymaps
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous Diagnostic message' })
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next Diagnostic message' })
@@ -23,7 +26,7 @@ vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n><cmd>ToggleTerm<cr>', { desc = 'Ex
 
 -- TIP: Disable insert-mode CTRL+w to not get stuck closing browser tabs later
 vim.keymap.set('i', '<C-w>', function()
-  vim.notify('Use ctrl-backspace a.k.a. <C-BS>', vim.log.levels.INFO, nil)
+  vim.notify('Use ctrl-backspace or <C-BS>', vim.log.levels.INFO, nil)
 end, { desc = 'No More Closing Browser Tabs by accident' })
 vim.keymap.set('i', '<C-BS>', '<C-w>', { desc = 'No More Closing Browser Tabs by accident' })
 vim.keymap.set('i', '<C-h>', '<C-w>', { desc = 'No More Closing Browser Tabs by accident' })
