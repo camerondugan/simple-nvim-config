@@ -94,5 +94,8 @@ vim.opt.termguicolors = true
 -- Conceal some text (mainly for orgmode)
 vim.opt.conceallevel = 2
 
---Alter file types
+-- Alter file types
 vim.filetype.add { extension = { norg = 'org' } }
+
+-- GUI font
+vim.opt.guifont = 'JetBrainsMono\\ Nerd\\ Font:h11'
