@@ -495,6 +495,7 @@ require('lazy').setup {
       local cmp = require 'cmp'
       local luasnip = require 'luasnip'
       luasnip.config.setup {}
+      luasnip.filetype_extend('text', { 'license' })
 
       cmp.setup {
         snippet = {
