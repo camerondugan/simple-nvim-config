@@ -51,22 +51,6 @@ return {
   -- Zoxide (fast directory change)
   { 'nanotee/zoxide.vim', lazy = false },
 
-  { -- hints to improve your vim motion usage
-    'm4xshen/hardtime.nvim',
-    event = 'InsertEnter',
-    dependencies = { 'MunifTanjim/nui.nvim', 'nvim-lua/plenary.nvim' },
-    opts = {
-      restriction_mode = 'hint',
-      disable_mouse = false,
-      disabled_keys = { -- prevents disabled arrow keys
-        ['<Up>'] = {},
-        ['<Down>'] = {},
-        ['<Left>'] = {},
-        ['<Right>'] = {},
-      },
-    },
-  },
-
   { -- LuaLine (status line for Neovim)
     'nvim-lualine/lualine.nvim',
     dependencies = { 'nvim-tree/nvim-web-devicons' },
@@ -89,7 +73,7 @@ return {
   { -- Harpoon 2 (fast buffer change)
     'ThePrimeagen/harpoon',
     branch = 'harpoon2',
-    commit = 'e76cb03',
+    -- commit = 'e76cb03', -- for when harpoon breaks
     dependencies = { 'nvim-lua/plenary.nvim' },
     opts = { settings = {
       save_on_toggle = true,
