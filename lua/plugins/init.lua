@@ -205,4 +205,30 @@ return {
     dependencies = { 'neovim/nvim-lspconfig' },
     config = true,
   },
+
+  -- LLM Tinkering
+  {
+    'nomnivore/ollama.nvim',
+    dependencies = {
+      'nvim-lua/plenary.nvim',
+    },
+    cmd = { 'Ollama', 'OllamaModel', 'OllamaServe', 'OllamaServeStop' },
+    keys = {
+      {
+        '<leader>ll',
+        ":<c-u>lua require('ollama').prompt()<cr>",
+        desc = 'ollama prompt',
+        mode = { 'n', 'v' },
+      },
+      {
+        '<leader>lG',
+        ":<c-u>lua require('ollama').prompt('Generate_Code')<cr>",
+        desc = 'ollama Generate Code',
+        mode = { 'n', 'v' },
+      },
+    },
+    opts = {
+      model = 'codellama:13b',
+    },
+  },
 }
