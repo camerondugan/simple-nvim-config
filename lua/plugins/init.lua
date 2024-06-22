@@ -228,7 +228,7 @@ return {
       },
     },
     opts = {
-      model = 'codellama:13b',
+      model = 'mistral',
     },
   },
 }
