@@ -25,7 +25,7 @@ return {
     opts = {},
     keys = {
       {
-        '+',
+        '=',
         '<cmd>ToggleTerm<cr><cmd>startinsert<cr><cmd>setlocal nospell<cr>',
         desc = 'ToggleTerm',
       },
@@ -73,7 +73,7 @@ return {
   { -- Harpoon 2 (fast buffer change)
     'ThePrimeagen/harpoon',
     branch = 'harpoon2',
-    -- commit = 'e76cb03', -- for when harpoon breaks
+    commit = 'e76cb03', -- for when harpoon breaks
     dependencies = { 'nvim-lua/plenary.nvim' },
     opts = { settings = {
       save_on_toggle = true,
