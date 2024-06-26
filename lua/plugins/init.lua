@@ -214,21 +214,51 @@ return {
     },
     cmd = { 'Ollama', 'OllamaModel', 'OllamaServe', 'OllamaServeStop' },
     keys = {
+      -- {
+      --   '<leader>ll',
+      --   ":<c-u>lua require('ollama').prompt()<cr>",
+      --   desc = 'Ollama Prompt',
+      --   mode = { 'n', 'v' },
+      -- },
       {
-        '<leader>ll',
-        ":<c-u>lua require('ollama').prompt()<cr>",
-        desc = 'ollama prompt',
+        '<leader>le',
+        ":<c-u>lua require('ollama').prompt('Explain_Code')<cr>",
+        desc = 'Ollama Explain Code',
         mode = { 'n', 'v' },
       },
       {
-        '<leader>lG',
-        ":<c-u>lua require('ollama').prompt('Generate_Code')<cr>",
-        desc = 'ollama Generate Code',
+        '<leader>lE',
+        "<esc>ggVG:<c-u>lua require('ollama').prompt('Explain_Code')<cr>",
+        desc = 'Ollama Explain File',
+        mode = { 'n', 'v' },
+      },
+      {
+        '<leader>lq',
+        ":<c-u>lua require('ollama').prompt('Ask_About_Code')<cr>",
+        desc = 'Ollama Ask About Code',
+        mode = { 'n', 'v' },
+      },
+      {
+        '<leader>lQ',
+        "<esc>ggVG:<c-u>lua require('ollama').prompt('Ask_About_Code')<cr>",
+        desc = 'Ollama Ask About Code whole file',
+        mode = { 'n', 'v' },
+      },
+      {
+        '<leader>lq',
+        ":<c-u>lua require('ollama').prompt('Ask_About_Code')<cr>",
+        desc = 'Ollama Ask About Code',
+        mode = { 'n', 'v' },
+      },
+      {
+        '<leader>ll',
+        ":<c-u>lua require('ollama').prompt('Raw')<cr>",
+        desc = 'Ollama Chat',
         mode = { 'n', 'v' },
       },
     },
-    opts = {
-      model = 'mistral',
+    opts = { -- a custom ollama model found here: https://github.com/camerondugan/pair-programmer
+      model = 'pair-programmer', -- it avoids brain rot from code gen for the most part.
     },
   },
 }
