@@ -99,3 +99,15 @@ vim.filetype.add { extension = { norg = 'org' } }
 
 -- GUI font
 vim.opt.guifont = 'JetBrainsMono\\ Nerd\\ Font:h11'
+
+-- Show source of diagnostics
+vim.diagnostic.config {
+  virtual_text = {
+    source = true,
+  },
+  update_in_insert = false,
+  float = {
+    border = 'rounded',
+    source = true,
+  },
+}
