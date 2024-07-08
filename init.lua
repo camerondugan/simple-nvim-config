@@ -624,7 +624,7 @@ require('lazy').setup {
       -- - sd'   - Surround Delete '
       -- - sr)'  - Surround Replace ) '
       require('mini.surround').setup()
-      require('mini.pairs').setup() -- Auto add ([{' pairs
+      -- require('mini.pairs').setup() -- Auto add ([{' pairs
       -- ... And there is more!
       --  Check out: https://github.com/echasnovski/mini.nvim
     end,
@@ -666,6 +666,7 @@ require('lazy').setup {
   --  Uncomment any of the lines below to enable them (you will need to restart nvim).
   require 'kickstart.plugins.debug',
   require 'kickstart.plugins.gitsigns',
+  require 'kickstart.plugins.autopairs',
   -- require 'kickstart.plugins.indent_line',
   require 'kickstart.plugins.lint',
 
