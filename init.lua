@@ -44,12 +44,25 @@ require('lazy').setup {
         ['<leader>g'] = { name = 'Git', _ = 'which_key_ignore' },
         ['<leader>r'] = { name = 'Refactor', _ = 'which_key_ignore' },
         ['<leader>s'] = { name = 'Search', _ = 'which_key_ignore' },
-        ['<leader>t'] = { name = 'Toggle', _ = 'which_key_ignore' },
         ['<leader>w'] = { name = 'Workspace', _ = 'which_key_ignore' },
+        ['<leader>t'] = { name = 'Toggle', _ = 'which_key_ignore' },
+        ['<leader>h'] = { name = 'Git Hunk', _ = 'which_key_ignore' },
+        ['<leader>l'] = { name = 'Ollama', _ = 'which_key_ignore' },
         ['<leader>o'] = { name = 'OrgMode', _ = 'which_key_ignore' },
         ['<leader>m'] = { name = 'Markdown', _ = 'which_key_ignore' },
         ['<leader>p'] = { name = 'Preview', _ = 'which_key_ignore' },
       }
+      -- visual mode
+      wk.register({
+        ['<leader>l'] = { 'Ollama' },
+      }, {
+        mode = 'v',
+      })
+      wk.register({
+        ['<leader>h'] = { 'Git Hunk' },
+      }, {
+        mode = 'v',
+      })
       -- Select Mode
       wk.register({
         ['<leader>r'] = { name = 'Refactor', _ = 'which_key_ignore' },
@@ -198,7 +211,7 @@ require('lazy').setup {
     'neovim/nvim-lspconfig',
     dependencies = {
       -- Automatically install LSPs and related tools to stdpath for Neovim
-      'williamboman/mason.nvim',
+      { 'williamboman/mason.nvim', config = true },
       'williamboman/mason-lspconfig.nvim',
       'WhoIsSethDaniel/mason-tool-installer.nvim',
 
@@ -265,10 +278,6 @@ require('lazy').setup {
           --  the definition of its *type*, not where it was *defined*.
           map('<leader>D', require('telescope.builtin').lsp_type_definitions, 'Type Definition')
 
-          -- Fuzzy find all the symbols in your current document.
-          --  Symbols are things like variables, functions, types, etc.
-          map('<leader>ds', require('telescope.builtin').lsp_document_symbols, 'Document Symbols')
-
           -- Fuzzy find all the symbols in your current workspace
           --  Similar to document symbols, except searches over your whole project.
           map('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, 'Workspace Symbols')
@@ -280,6 +289,10 @@ require('lazy').setup {
           -- Execute a code action, usually your cursor needs to be on top of an error
           -- or a suggestion from your LSP for this to activate.
           map('<leader>ca', vim.lsp.buf.code_action, 'Code Action')
+
+          -- Fuzzy find all the symbols in your current buffer.
+          --  Symbols are things like variables, functions, types, etc.
+          map('<leader>cs', require('telescope.builtin').lsp_document_symbols, 'Code Symbols')
 
           -- Opens a popup that displays documentation about the word under your cursor
           --  See `:help K` for why this keymap.
@@ -295,15 +308,32 @@ require('lazy').setup {
           -- When you move your cursor, the highlights will be cleared (the second autocommand).
           local client = vim.lsp.get_client_by_id(event.data.client_id)
           if client and client.server_capabilities.documentHighlightProvider then
+            local highlight_augroup = vim.api.nvim_create_augroup('kickstart-lsp-highlight', { clear = false })
             vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
               buffer = event.buf,
+              group = highlight_augroup,
               callback = vim.lsp.buf.document_highlight,
             })
 
             vim.api.nvim_create_autocmd({ 'CursorMoved', 'CursorMovedI' }, {
               buffer = event.buf,
+              group = highlight_augroup,
               callback = vim.lsp.buf.clear_references,
             })
+
+            vim.api.nvim_create_autocmd('LspDetach', {
+              group = vim.api.nvim_create_augroup('kickstart-lsp-detach', { clear = true }),
+              callback = function(event2)
+                vim.lsp.buf.clear_references()
+                vim.api.nvim_clear_autocmds { group = 'kickstart-lsp-highlight', buffer = event2.buf }
+              end,
+            })
+          end
+          if client and client.server_capabilities.inlayHintProvider and vim.lsp.inlay_hint then
+            map('<leader>th', function()
+              vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
+              print('Inlay enabled: ' .. tostring(vim.lsp.inlay_hint.is_enabled()))
+            end, 'Inlay Hints')
           end
         end,
       })
@@ -429,6 +459,16 @@ require('lazy').setup {
   { -- Auto format
     'stevearc/conform.nvim',
     lazy = false,
+    keys = {
+      {
+        '<leader>f',
+        function()
+          require('conform').format { async = true, lsp_fallback = true }
+        end,
+        mode = '',
+        desc = 'Format buffer',
+      },
+    },
     opts = {
       notify_on_error = false,
       format_on_save = function(bufnr)
@@ -593,7 +633,7 @@ require('lazy').setup {
     'nvim-treesitter/nvim-treesitter',
     build = ':TSUpdate',
     opts = {
-      ensure_installed = { 'bash', 'c', 'html', 'lua', 'luadoc', 'markdown', 'vim', 'vimdoc' },
+      ensure_installed = { 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'vim', 'vimdoc' },
       -- Auto-install languages that are not installed
       auto_install = true,
       highlight = {
@@ -607,6 +647,9 @@ require('lazy').setup {
     },
     config = function(_, opts)
       -- [[ Configure Treesitter ]] See `:help nvim-treesitter`
+
+      -- Prefer git instead of curl in order to improve connectivity in some environments
+      require('nvim-treesitter.install').prefer_git = true
 
       ---@diagnostic disable-next-line: missing-fields
       require('nvim-treesitter.configs').setup(opts)
@@ -622,6 +665,7 @@ require('lazy').setup {
 
   --  Uncomment any of the lines below to enable them (you will need to restart nvim).
   require 'kickstart.plugins.debug',
+  require 'kickstart.plugins.gitsigns',
   -- require 'kickstart.plugins.indent_line',
   require 'kickstart.plugins.lint',
 

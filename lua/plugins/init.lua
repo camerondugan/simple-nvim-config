@@ -213,6 +213,9 @@ return {
       'nvim-lua/plenary.nvim',
     },
     cmd = { 'Ollama', 'OllamaModel', 'OllamaServe', 'OllamaServeStop' },
+    opts = { -- a custom ollama model found here: https://github.com/camerondugan/pair-programmer
+      model = 'pair-programmer', -- it avoids brain rot from code gen for the most part.
+    },
     keys = {
       -- {
       --   '<leader>ll',
@@ -256,9 +259,6 @@ return {
         desc = 'Ollama Chat',
         mode = { 'n', 'v' },
       },
-    },
-    opts = { -- a custom ollama model found here: https://github.com/camerondugan/pair-programmer
-      model = 'pair-programmer', -- it avoids brain rot from code gen for the most part.
     },
   },
 }
