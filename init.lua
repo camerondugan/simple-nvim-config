@@ -38,37 +38,32 @@ require('lazy').setup {
 
       -- Document existing key chains
       -- Normal Mode
-      wk.register {
-        ['<leader>c'] = { name = 'Code', _ = 'which_key_ignore' },
-        ['<leader>d'] = { name = 'Document', _ = 'which_key_ignore' },
-        ['<leader>g'] = { name = 'Git', _ = 'which_key_ignore' },
-        ['<leader>r'] = { name = 'Refactor', _ = 'which_key_ignore' },
-        ['<leader>s'] = { name = 'Search', _ = 'which_key_ignore' },
-        ['<leader>w'] = { name = 'Workspace', _ = 'which_key_ignore' },
-        ['<leader>t'] = { name = 'Toggle', _ = 'which_key_ignore' },
-        ['<leader>h'] = { name = 'Git Hunk', _ = 'which_key_ignore' },
-        ['<leader>l'] = { name = 'Ollama', _ = 'which_key_ignore' },
-        ['<leader>o'] = { name = 'OrgMode', _ = 'which_key_ignore' },
-        ['<leader>m'] = { name = 'Markdown', _ = 'which_key_ignore' },
-        ['<leader>p'] = { name = 'Preview', _ = 'which_key_ignore' },
+      wk.add {
+        { '<leader>c', group = 'Code' },
+        { '<leader>c_', hidden = true },
+        { '<leader>d', group = 'Document' },
+        { '<leader>d_', hidden = true },
+        { '<leader>g', group = 'Git' },
+        { '<leader>g_', hidden = true },
+        { '<leader>h', group = 'Git Hunk' },
+        { '<leader>h_', hidden = true },
+        { '<leader>l', group = 'Ollama' },
+        { '<leader>l_', hidden = true },
+        { '<leader>m', group = 'Markdown' },
+        { '<leader>m_', hidden = true },
+        { '<leader>o', group = 'OrgMode' },
+        { '<leader>o_', hidden = true },
+        { '<leader>p', group = 'Preview' },
+        { '<leader>p_', hidden = true },
+        { '<leader>r', group = 'Refactor' },
+        { '<leader>r_', hidden = true },
+        { '<leader>s', group = 'Search' },
+        { '<leader>s_', hidden = true },
+        { '<leader>t', group = 'Toggle' },
+        { '<leader>t_', hidden = true },
+        { '<leader>w', group = 'Workspace' },
+        { '<leader>w_', hidden = true },
       }
-      -- visual mode
-      wk.register({
-        ['<leader>l'] = { 'Ollama' },
-      }, {
-        mode = 'v',
-      })
-      wk.register({
-        ['<leader>h'] = { 'Git Hunk' },
-      }, {
-        mode = 'v',
-      })
-      -- Select Mode
-      wk.register({
-        ['<leader>r'] = { name = 'Refactor', _ = 'which_key_ignore' },
-      }, {
-        mode = 'x',
-      })
     end,
   },
 
@@ -396,6 +391,8 @@ require('lazy').setup {
           },
         },
       }
+      -- gdscript not from mason, built into godot engine
+      require('lspconfig').gdscript.setup {}
 
       -- Ensure the servers and tools above are installed
       --  To check the current status of installed tools and/or manually install
