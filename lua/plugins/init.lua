@@ -164,6 +164,12 @@ return {
     end,
   },
 
+  {
+    'andrewferrier/wrapping.nvim',
+    config = function()
+      require('wrapping').setup()
+    end,
+  },
   { -- Markdown Preview
     'iamcco/markdown-preview.nvim',
     ft = { 'markdown' }, -- only loads in markdown files

@@ -91,6 +91,9 @@ vim.opt.scrolloff = 10
 -- Plugin Options
 vim.opt.termguicolors = true
 
+-- Sets text width
+vim.opt.textwidth = 80
+
 -- Conceal some text (mainly for orgmode)
 vim.opt.conceallevel = 2
 
