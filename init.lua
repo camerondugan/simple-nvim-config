@@ -87,6 +87,7 @@ require('lazy').setup {
       -- Useful for getting pretty icons, but requires a Nerd Font.
       { 'nvim-tree/nvim-web-devicons', enabled = vim.g.have_nerd_font },
       { 'jvgrootveld/telescope-zoxide' },
+      { 'ThePrimeagen/harpoon' },
     },
     config = function()
       -- Telescope is a fuzzy finder that comes with a lot of different things that
@@ -135,10 +136,10 @@ require('lazy').setup {
             prompt_title = '[ Zoxide ]',
             mappings = {
               default = {
-                -- auto open file search after
-                -- after_action = function(selection)
-                --   require('telescope.builtin').find_files()
-                -- end,
+                -- auto open first harpoon item
+                after_action = function(selection)
+                  require('harpoon'):list():select(1)
+                end,
               },
               ['<C-s>'] = {
                 -- before_action = function(selection)
@@ -166,12 +167,17 @@ require('lazy').setup {
       vim.keymap.set('n', '<leader>st', builtin.builtin, { desc = 'Search Telescopes' })
       vim.keymap.set('n', '<leader>sw', builtin.grep_string, { desc = 'Search current Word' })
       vim.keymap.set('n', '<leader>sg', builtin.live_grep, { desc = 'Search by Grep' })
-      vim.keymap.set('n', '<leader>z', extensions.zoxide.list, { desc = 'Zoxide' })
       vim.keymap.set('n', '<C-z>', extensions.zoxide.list, { desc = 'Zoxide' })
       vim.keymap.set('n', '<leader>sD', builtin.diagnostics, { desc = 'Search Diagnostics' })
       vim.keymap.set('n', '<leader>sr', builtin.resume, { desc = 'Search Resume' })
       vim.keymap.set('n', '<leader>s.', builtin.oldfiles, { desc = 'Search Recent Files ("." for repeat)' })
       vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = 'Find existing buffers' })
+
+      local zoxide_list = function()
+        extensions.zoxide.list()
+        require('harpoon'):list():select(1)
+      end
+      vim.keymap.set('n', '<leader>z', zoxide_list, { desc = 'Zoxide' })
 
       -- Slightly advanced example of overriding default behavior and theme
       vim.keymap.set('n', '<leader>/', function()
