@@ -3,21 +3,23 @@ return {
   { -- File explorer
     'stevearc/oil.nvim',
     dependencies = { 'nvim-tree/nvim-web-devicons' },
-    config = function()
-      require('oil').setup {
-        columns = { 'icon' },
-        keymaps = {
-          ['<C-h}'] = false,
-          ['<M-h>'] = 'actions.select_split',
-        },
-        view_options = {
-          show_hidden = true,
-        },
-      }
-
-      -- Open parent folder in cur window
-      vim.keymap.set('n', '-', '<cmd>Oil<cr>', { desc = 'Open parent dir' })
-    end,
+    opts = {
+      columns = { 'icon' },
+      keymaps = {
+        ['<C-h}'] = false,
+        ['<M-h>'] = 'actions.select_split',
+      },
+      view_options = {
+        show_hidden = true,
+      },
+    },
+    keys = {
+      {
+        '-',
+        '<cmd>Oil<cr>',
+        desc = 'Open parent dir',
+      },
+    },
   },
 
   { --Toggle Terminal
@@ -54,15 +56,22 @@ return {
   { -- LuaLine (status line for Neovim)
     'nvim-lualine/lualine.nvim',
     dependencies = { 'nvim-tree/nvim-web-devicons' },
-    opts = {},
+    opts = {
+      options = {
+        component_separators = '',
+        section_separators = { left = '', right = '' },
+      },
+    },
   },
 
   { -- Show how long it's been since you tweaked your config
     'blumaa/ohne-accidents',
-    config = function()
-      require('ohne-accidents').setup { welcomeOnStartup = false }
-      vim.api.nvim_set_keymap('n', '<leader>oh', ':OhneAccidents<cr>', { noremap = true, silent = true })
-    end,
+    opts = {
+      welcomeOnStartup = false,
+    },
+    keys = {
+      { '<leader>oh', '<cmd>OhneAccidents<cr>', desc = 'See how long since you modified your nvim config' },
+    },
   },
 
   { -- Highlight colors from hex or other color codes
@@ -75,10 +84,12 @@ return {
     branch = 'harpoon2',
     commit = 'e76cb03', -- for when harpoon breaks
     dependencies = { 'nvim-lua/plenary.nvim' },
-    opts = { settings = {
-      save_on_toggle = true,
-      save_on_ui_close = true,
-    } },
+    opts = {
+      settings = {
+        save_on_toggle = true,
+        save_on_ui_close = true,
+      },
+    },
     config = function(opts)
       local harpoon = require 'harpoon'
       harpoon:setup { opts }
@@ -144,31 +155,23 @@ return {
 
   { -- Notes and organization
     'nvim-orgmode/orgmode',
-    event = 'VeryLazy',
-    config = function()
-      -- Setup orgmode
-      require('orgmode').setup {
-        org_agenda_files = '~/Notes/**',
-        org_default_notes_file = '~/Notes/index.org',
-      }
-    end,
+    opts = {
+      org_agenda_files = '~/Notes/**',
+      org_default_notes_file = '~/Notes/index.org',
+    },
   },
 
   { -- Auto Session
     'rmagatti/auto-session',
-    config = function()
-      require('auto-session').setup {
-        log_level = 'error',
-        auto_session_suppress_dirs = { '~/', '~/Downloads', '/' },
-      }
-    end,
+    opts = {
+      log_level = 'error',
+      auto_session_suppress_dirs = { '~/', '~/Downloads', '/' },
+    },
   },
 
   {
     'andrewferrier/wrapping.nvim',
-    config = function()
-      require('wrapping').setup()
-    end,
+    opts = {},
   },
   { -- Markdown Preview
     'iamcco/markdown-preview.nvim',
