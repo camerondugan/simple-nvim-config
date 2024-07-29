@@ -45,8 +45,6 @@ require('lazy').setup {
         { '<leader>d_', hidden = true },
         { '<leader>g', group = 'Git' },
         { '<leader>g_', hidden = true },
-        { '<leader>h', group = 'Git Hunk' },
-        { '<leader>h_', hidden = true },
         { '<leader>l', group = 'Ollama' },
         { '<leader>l_', hidden = true },
         { '<leader>m', group = 'Markdown' },
@@ -61,8 +59,6 @@ require('lazy').setup {
         { '<leader>s_', hidden = true },
         { '<leader>t', group = 'Toggle' },
         { '<leader>t_', hidden = true },
-        { '<leader>w', group = 'Workspace' },
-        { '<leader>w_', hidden = true },
       }
     end,
   },
@@ -167,7 +163,7 @@ require('lazy').setup {
       vim.keymap.set('n', '<leader>sf', builtin.find_files, { desc = 'Search Git Files' })
       vim.keymap.set('n', '<leader>sF', builtin.git_files, { desc = 'Search Git Files' })
       vim.keymap.set('n', '<leader>sa', builtin.find_files, { desc = 'Search All Files' })
-      vim.keymap.set('n', '<leader>ss', builtin.builtin, { desc = 'Search Select Telescope' })
+      vim.keymap.set('n', '<leader>st', builtin.builtin, { desc = 'Search Telescopes' })
       vim.keymap.set('n', '<leader>sw', builtin.grep_string, { desc = 'Search current Word' })
       vim.keymap.set('n', '<leader>sg', builtin.live_grep, { desc = 'Search by Grep' })
       vim.keymap.set('n', '<leader>z', extensions.zoxide.list, { desc = 'Zoxide' })
@@ -275,7 +271,12 @@ require('lazy').setup {
 
           -- Fuzzy find all the symbols in your current workspace
           --  Similar to document symbols, except searches over your whole project.
-          map('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, 'Workspace Symbols')
+          vim.keymap.set(
+            'n',
+            '<leader>ss',
+            require('telescope.builtin').lsp_dynamic_workspace_symbols,
+            { buffer = event.buf, desc = 'Search Symbols in Workspace' }
+          )
 
           -- Rename the variable under your cursor.
           --  Most Language Servers support renaming across files, etc.
