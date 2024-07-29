@@ -8,7 +8,7 @@ return {
       skip_confirm_for_simple_edits = true,
       columns = { 'icon' },
       keymaps = {
-        ['<C-h}'] = false,
+        ['<C-h>'] = false,
         ['<M-h>'] = 'actions.select_split',
       },
       view_options = {
