@@ -575,10 +575,10 @@ require('lazy').setup {
           end, { 'i', 's' }),
         },
         sources = {
-          { name = 'nvim_lsp' },
+          -- { name = 'nvim_lsp' },
           { name = 'luasnip' },
           { name = 'orgmode' },
-          { name = 'buffer', keyword_length = 4 },
+          -- { name = 'buffer', keyword_length = 4 },
           { name = 'path', keyword_length = 3 },
           { name = 'rg', keyword_length = 2 },
         },
