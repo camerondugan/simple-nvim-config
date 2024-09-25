@@ -438,7 +438,6 @@ require('lazy').setup {
         'yamllint', -- yaml
         'jsonlint', -- json
         'hadolint', -- docker file
-        'write-good', -- English writing
         'proselint',
         'shellcheck',
         'shellharden',
@@ -575,12 +574,12 @@ require('lazy').setup {
           end, { 'i', 's' }),
         },
         sources = {
-          -- { name = 'nvim_lsp' },
+          { name = 'nvim_lsp' },
           { name = 'luasnip' },
           { name = 'orgmode' },
           -- { name = 'buffer', keyword_length = 4 },
-          { name = 'path', keyword_length = 3 },
-          { name = 'rg', keyword_length = 2 },
+          { name = 'path'},--, keyword_length = 2 },
+          { name = 'rg'},-- keyword_length = 2 },
         },
       }
     end,
