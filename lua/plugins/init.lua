@@ -131,14 +131,6 @@ return {
     },
   },
 
-  { -- Auto Session
-    'rmagatti/auto-session',
-    opts = {
-      log_level = 'error',
-      auto_session_suppress_dirs = { '~/', '~/Downloads', '/' },
-    },
-  },
-
   { -- Wraps based on file info
     'andrewferrier/wrapping.nvim',
     opts = {},
