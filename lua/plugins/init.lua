@@ -28,18 +28,6 @@ return {
     },
   },
 
-  { --Toggle Terminal
-    'akinsho/toggleterm.nvim',
-    opts = {},
-    keys = {
-      {
-        '=',
-        '<cmd>ToggleTerm<cr><cmd>startinsert<cr><cmd>setlocal nospell<cr>',
-        desc = 'ToggleTerm',
-      },
-    },
-  },
-
   { -- Auto-Save buffers
     'tmillr/sos.nvim',
     event = 'InsertEnter',
