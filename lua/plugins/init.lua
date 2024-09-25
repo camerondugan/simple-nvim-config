@@ -44,30 +44,6 @@ return {
     },
   },
 
-  -- Zoxide (fast directory change)
-  { 'nanotee/zoxide.vim', lazy = false },
-
-  { -- LuaLine (status line for Neovim)
-    'nvim-lualine/lualine.nvim',
-    dependencies = { 'nvim-tree/nvim-web-devicons' },
-    opts = {
-      options = {
-        component_separators = '',
-        section_separators = { left = '', right = '' },
-      },
-    },
-  },
-
-  { -- Show how long it's been since you tweaked your config
-    'blumaa/ohne-accidents',
-    opts = {
-      welcomeOnStartup = false,
-    },
-    keys = {
-      { '<leader>oh', '<cmd>OhneAccidents<cr>', desc = 'See how long since you modified your nvim config' },
-    },
-  },
-
   { -- Highlight colors from hex or other color codes
     'brenoprata10/nvim-highlight-colors',
     opts = {},
@@ -163,10 +139,11 @@ return {
     },
   },
 
-  {
+  { -- Wraps based on file info
     'andrewferrier/wrapping.nvim',
     opts = {},
   },
+
   { -- Markdown Preview
     'iamcco/markdown-preview.nvim',
     ft = { 'markdown' }, -- only loads in markdown files
@@ -199,69 +176,6 @@ return {
     -- optional for floating window border decoration
     dependencies = {
       'nvim-lua/plenary.nvim',
-    },
-  },
-
-  -- Framework Specific Plugins
-  { -- Flutter
-    'mskelton/flutter.nvim',
-    dependencies = { 'neovim/nvim-lspconfig' },
-    config = true,
-  },
-
-  -- LLM Tinkering
-  {
-    'nomnivore/ollama.nvim',
-    dependencies = {
-      'nvim-lua/plenary.nvim',
-    },
-    cmd = { 'Ollama', 'OllamaModel', 'OllamaServe', 'OllamaServeStop' },
-    opts = { -- a custom ollama model found here: https://github.com/camerondugan/pair-programmer
-      model = 'pair-programmer', -- it avoids brain rot from code gen for the most part.
-    },
-    keys = {
-      -- {
-      --   '<leader>ll',
-      --   ":<c-u>lua require('ollama').prompt()<cr>",
-      --   desc = 'Ollama Prompt',
-      --   mode = { 'n', 'v' },
-      -- },
-      {
-        '<leader>le',
-        ":<c-u>lua require('ollama').prompt('Explain_Code')<cr>",
-        desc = 'Ollama Explain Code',
-        mode = { 'n', 'v' },
-      },
-      {
-        '<leader>lE',
-        "<esc>ggVG:<c-u>lua require('ollama').prompt('Explain_Code')<cr>",
-        desc = 'Ollama Explain File',
-        mode = { 'n', 'v' },
-      },
-      {
-        '<leader>lq',
-        ":<c-u>lua require('ollama').prompt('Ask_About_Code')<cr>",
-        desc = 'Ollama Ask About Code',
-        mode = { 'n', 'v' },
-      },
-      {
-        '<leader>lQ',
-        "<esc>ggVG:<c-u>lua require('ollama').prompt('Ask_About_Code')<cr>",
-        desc = 'Ollama Ask About Code whole file',
-        mode = { 'n', 'v' },
-      },
-      {
-        '<leader>lq',
-        ":<c-u>lua require('ollama').prompt('Ask_About_Code')<cr>",
-        desc = 'Ollama Ask About Code',
-        mode = { 'n', 'v' },
-      },
-      {
-        '<leader>ll',
-        ":<c-u>lua require('ollama').prompt('Raw')<cr>",
-        desc = 'Ollama Chat',
-        mode = { 'n', 'v' },
-      },
     },
   },
 }

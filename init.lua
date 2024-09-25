@@ -45,8 +45,6 @@ require('lazy').setup {
         { '<leader>d_', hidden = true },
         { '<leader>g', group = 'Git' },
         { '<leader>g_', hidden = true },
-        { '<leader>l', group = 'Ollama' },
-        { '<leader>l_', hidden = true },
         { '<leader>m', group = 'Markdown' },
         { '<leader>m_', hidden = true },
         { '<leader>o', group = 'OrgMode' },
@@ -380,7 +378,6 @@ require('lazy').setup {
         taplo = {},
         -- Some languages (like typescript) have entire language plugins that can be useful:
         --    https://github.com/pmizio/typescript-tools.nvim
-        tsserver = {},
         typos_lsp = {},
         yamlls = {},
         lua_ls = {
@@ -461,7 +458,7 @@ require('lazy').setup {
 
   { -- Auto format
     'stevearc/conform.nvim',
-    lazy = false,
+    lazy = true,
     keys = {
       {
         '<leader>f',
@@ -474,13 +471,6 @@ require('lazy').setup {
     },
     opts = {
       notify_on_error = false,
-      format_on_save = function(bufnr)
-        local disable_filetypes = { c = true, cpp = true }
-        return {
-          timeout_ms = 500,
-          lsp_fallback = not disable_filetypes[vim.bo[bufnr].filetype],
-        }
-      end,
       formatters_by_ft = {
         go = { 'goimports', 'golines', 'gofmt' }, -- a then b then c
         java = { 'clang-format' },
