@@ -387,17 +387,19 @@ require('lazy').setup {
         jsonls = {},
         lemminx = {}, -- XML
         luacheck = {},
-        nil_ls = {},
-        omnisharp = {},
-        omnisharp_mono = {},
         pyright = {},
-        rust_analyzer = {},
         taplo = {},
         -- Some languages (like typescript) have entire language plugins that can be useful:
         --    https://github.com/pmizio/typescript-tools.nvim
-        typos_lsp = {},
-        yamlls = {},
-        lua_ls = {
+      }
+
+      -- Anything not from mason / cannot run without dynamic linking
+      require('lspconfig').gdscript.setup {}
+      require('lspconfig').rust_analyzer.setup {}
+      require('lspconfig').nil_ls.setup {}
+      require('lspconfig').typos_lsp.setup {}
+      require('lspconfig').yamlls.setup {}
+      require('lspconfig').lua_ls.setup {
           -- cmd = {...},
           -- filetypes = { ...},
           -- capabilities = {},
@@ -410,10 +412,7 @@ require('lazy').setup {
               -- diagnostics = { disable = { 'missing-fields' } },
             },
           },
-        },
       }
-      -- gdscript not from mason, built into godot engine
-      require('lspconfig').gdscript.setup {}
 
       -- Ensure the servers and tools above are installed
       --  To check the current status of installed tools and/or manually install
