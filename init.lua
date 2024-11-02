@@ -281,6 +281,10 @@ require('lazy').setup {
           -- or a suggestion from your LSP for this to activate.
           map('<leader>ca', vim.lsp.buf.code_action, 'Code Action')
 
+          -- Restart your LSP, useful when suggestions stop working.
+          -- Hopefully you will rarely use this one.
+          map('<leader>cr', '<cmd>LspRestart<cr>', 'Restart Lsp' )
+
           -- Fuzzy find all the symbols in your current buffer.
           --  Symbols are things like variables, functions, types, etc.
           map('<leader>cs', require('telescope.builtin').lsp_document_symbols, 'Code Symbols')
@@ -368,7 +372,7 @@ require('lazy').setup {
 
       -- Anything not from mason / cannot run without dynamic linking
       require('lspconfig').gdscript.setup {}
-      require('lspconfig').rust_analyzer.setup {}
+      require('lspconfig').rust_analyzer.setup { }
       require('lspconfig').nil_ls.setup {}
       require('lspconfig').typos_lsp.setup {}
       require('lspconfig').yamlls.setup {}
@@ -482,6 +486,7 @@ require('lazy').setup {
     event = 'InsertEnter',
     dependencies = {
       -- Snippet Engine & its associated nvim-cmp source
+      {'hrsh7th/cmp-nvim-lsp-signature-help'},
       {
         'L3MON4D3/LuaSnip',
         build = (function()
@@ -567,12 +572,14 @@ require('lazy').setup {
             -- set group index to 0 to skip loading LuaLS completions as lazydev recommends it
             group_index = 0,
           },
-          { name = 'nvim_lsp' },
-          { name = 'luasnip' },
-          { name = 'orgmode' },
-          -- { name = 'buffer', keyword_length = 4 },
-          { name = 'path'},--, keyword_length = 2 },
-          { name = 'rg'},-- keyword_length = 2 },
+          { name = 'nvim_lsp', max_item_count = 3 },
+          { name = 'nvim_lsp_signature_help', max_item_count = 3 },
+          { name = 'luasnip', max_item_count = 3},
+          { name = 'orgmode', max_item_count = 3},
+          { name = 'path', max_item_count = 3, keyword_length = 2 },
+          { name = 'rg', max_item_count = 3, keyword_length = 2 },
+          { name = 'calc', max_item_count = 3},
+          -- { name = 'buffer', keyword_length = 4 }, -- rg supersedes buffer
         },
       }
     end,

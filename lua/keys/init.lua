@@ -15,8 +15,8 @@ vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next Diagnos
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Error messages' })
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Quickfix list' })
 
--- Terminal Better Exit
-vim.keymap.set('t', '<S-Esc>', '<C-\\><C-n><cmd>ToggleTerm<cr>', { desc = 'Exit terminal mode' })
+-- -- Terminal Better Exit
+-- vim.keymap.set('t', '<S-Esc>', '<C-\\><C-n><cmd>ToggleTerm<cr>', { desc = 'Exit terminal mode' })
 
 -- TIP: Disable arrow keys in normal mode
 -- vim.keymap.set('n', '<left>', '<cmd>echo "Use h to move!!"<cr>')
