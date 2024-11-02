@@ -13,7 +13,7 @@ return {
       lint.linters_by_ft['markdown'] = { 'markdownlint', 'proselint' }
       lint.linters_by_ft['text'] = { 'proselint' }
       lint.linters_by_ft['org'] = { 'proselint' }
-      lint.linters_by_ft['python'] = { 'pylint' }
+      --lint.linters_by_ft['python'] = { 'pylint' }
       lint.linters_by_ft['go'] = { 'golangcilint' }
       lint.linters_by_ft['javascript'] = { 'quick-lint-js' }
       lint.linters_by_ft['yaml'] = { 'yamllint' }

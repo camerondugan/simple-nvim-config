@@ -28,6 +28,40 @@ return {
     },
   },
 
+  {
+    "folke/persistence.nvim",
+    event = "BufReadPre",
+    opts = {},
+    keys = {
+      { "<leader>qs", function() require('persistence').load() end, desc = "Quick Restore"},
+      { "<leader>qS", function() require('persistence').select() end, desc = "Select Session"},
+      { "<leader>ql", function() require('persistence').load({ last = true }) end, desc = "Quick_restore Last"},
+      { "<leader>qd", function() require('persistence').stop() end, desc = "Don't Save"},
+    },
+  },
+
+  {
+    'MeanderingProgrammer/render-markdown.nvim',
+    dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' },
+    ---@module 'render-markdown'
+    ---@type render.md.UserConfig
+    opts = {},
+  },
+
+  {
+    "folke/trouble.nvim",
+    opts = {focus = true,},
+    cmd = "Trouble",
+    keys = {
+      { "<leader>xx", "<cmd>Trouble diagnostics toggle<cr>", desc = "Diagnostics (Trouble)" },
+      { "<leader>xX", "<cmd>Trouble diagnostics toggle filter.buf=0<cr>", desc = "Buffer Diagnostics (Trouble)" },
+      { "<leader>xs", "<cmd>Trouble symbols toggle focus=false<cr>", desc = "Symbols (Trouble)" },
+      { "<leader>cl", "<cmd>Trouble lsp toggle focus win.position=right<cr>", desc = "LSP Definitions (Trouble)" },
+      { "<leader>xL", "<cmd>Trouble loclist toggle<cr>", desc = "Location List (Trouble)" },
+      { "<leader>xf", "<cmd>Trouble qflist toggle<cr>", desc = "Quickfix List (Trouble)" },
+    }
+  },
+
   { -- Auto-Save buffers
     'tmillr/sos.nvim',
     event = 'InsertEnter',

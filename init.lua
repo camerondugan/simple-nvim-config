@@ -17,8 +17,6 @@ vim.opt.rtp:prepend(lazypath)
 require('lazy').setup {
   'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
 
-  { 'numToStr/Comment.nvim', opts = {} }, -- "gc" to comment visual regions/lines
-
   { -- Adds git related signs to the gutter, as well as utilities for managing changes
     'lewis6991/gitsigns.nvim',
     opts = {
@@ -87,7 +85,6 @@ require('lazy').setup {
 
       -- Useful for getting pretty icons, but requires a Nerd Font.
       { 'nvim-tree/nvim-web-devicons', enabled = vim.g.have_nerd_font },
-      { 'jvgrootveld/telescope-zoxide' },
       { 'ThePrimeagen/harpoon' },
     },
     config = function()
@@ -110,7 +107,6 @@ require('lazy').setup {
       -- Telescope picker. This is really useful to discover what Telescope can
       -- do as well as how to actually do it!
 
-      -- local z_utils = require 'telescope._extensions.zoxide.utils'
 
       -- [[ Configure Telescope ]]
       -- See `:help telescope` and `:help telescope.setup()`
@@ -133,23 +129,6 @@ require('lazy').setup {
           ['ui-select'] = {
             require('telescope.themes').get_dropdown(),
           },
-          zoxide = {
-            prompt_title = '[ Zoxide ]',
-            mappings = {
-              default = {
-                -- auto open first harpoon item
-                after_action = function(selection)
-                  require('harpoon'):list():select(1)
-                end,
-              },
-              ['<C-s>'] = {
-                -- before_action = function(selection)
-                action = function(selection)
-                  vim.cmd.edit(selection.path)
-                end,
-              },
-            },
-          },
         },
       }
 
@@ -168,17 +147,11 @@ require('lazy').setup {
       vim.keymap.set('n', '<leader>st', builtin.builtin, { desc = 'Search Telescopes' })
       vim.keymap.set('n', '<leader>sw', builtin.grep_string, { desc = 'Search current Word' })
       vim.keymap.set('n', '<leader>sg', builtin.live_grep, { desc = 'Search by Grep' })
-      vim.keymap.set('n', '<C-z>', extensions.zoxide.list, { desc = 'Zoxide' })
       vim.keymap.set('n', '<leader>sD', builtin.diagnostics, { desc = 'Search Diagnostics' })
       vim.keymap.set('n', '<leader>sr', builtin.resume, { desc = 'Search Resume' })
       vim.keymap.set('n', '<leader>s.', builtin.oldfiles, { desc = 'Search Recent Files ("." for repeat)' })
       vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = 'Find existing buffers' })
 
-      local zoxide_list = function()
-        extensions.zoxide.list()
-        require('harpoon'):list():select(1)
-      end
-      vim.keymap.set('n', '<leader>z', zoxide_list, { desc = 'Zoxide' })
 
       -- Slightly advanced example of overriding default behavior and theme
       vim.keymap.set('n', '<leader>/', function()
@@ -444,7 +417,6 @@ require('lazy').setup {
         'java-test',
         -- linters
         'htmlhint',
-        'pylint', -- python
         'golangci-lint', -- golang
         'markdownlint', -- markdown
         'quick-lint-js', -- javascript
@@ -567,9 +539,9 @@ require('lazy').setup {
 
           -- If you prefer more traditional completion keymaps,
           -- you can uncomment the following lines
-          --['<CR>'] = cmp.mapping.confirm { select = true },
-          --['<Tab>'] = cmp.mapping.select_next_item(),
-          --['<S-Tab>'] = cmp.mapping.select_prev_item(),
+          ['<CR>'] = cmp.mapping.confirm { select = true },
+          ['<Tab>'] = cmp.mapping.select_next_item(),
+          ['<S-Tab>'] = cmp.mapping.select_prev_item(),
 
           -- Manually trigger a completion from nvim-cmp.
           --  Generally you don't need this, because nvim-cmp will display
@@ -622,17 +594,64 @@ require('lazy').setup {
     name = 'catppuccin',
     lazy = false, -- make sure we load this during startup if it is your main colorscheme
     priority = 1000, -- make sure to load this before all the other start plugins
-    config = function()
+    config = function(opts)
+      require('catppuccin').setup(opts)
       -- Load the colorscheme here
-      vim.cmd.colorscheme 'catppuccin-mocha'
+      vim.cmd.colorscheme 'catppuccin'
 
       -- You can configure highlights by doing something like
       vim.cmd.hi 'Comment gui=none'
     end,
+    opts = {
+      flavor = "mocha",
+      transparent_background = true,
+      integrations = {
+        harpoon = true,
+        gitsigns = true,
+        markdown = true,
+        which_key = true,
+        mason = true,
+        fzf = true,
+        telescope = {
+          enabled = true,
+          style = "nvchad",
+        },
+      },
+    },
   },
 
   -- Highlight todo, notes, etc in comments
-  { 'folke/todo-comments.nvim', event = 'VimEnter', dependencies = { 'nvim-lua/plenary.nvim' }, opts = { signs = false } },
+  { 'folke/todo-comments.nvim',
+    dependencies = { 'nvim-lua/plenary.nvim' },
+    event = 'VimEnter',
+    opts = { signs = false },
+    keys = {
+      {
+        '<leader>sT',
+        '<cmd>TodoTelescope<cr>',
+        mode = 'n',
+        desc = 'Todos (Telescope)',
+      },
+      {
+        '<leader>xi',
+        '<cmd>Trouble todo filter = {tag = {NOTE,WARNING,HACK,PERF}}<cr>',
+        mode = 'n',
+        desc = 'Todos (Trouble)',
+      },
+      {
+        '<leader>xt',
+        '<cmd>Trouble todo filter = {tag = {TODO,FIX,FIXME}}<cr>',
+        mode = 'n',
+        desc = 'Todos (Trouble)',
+      },
+      {
+        '<leader>xT',
+        '<cmd>Trouble todo = {tag = {TODO,FIX,FIXME}}<cr>',
+        mode = 'n',
+        desc = 'Todos All (Trouble)',
+      },
+    }
+  },
 
   { -- Collection of various small independent plugins/modules
     'echasnovski/mini.nvim',

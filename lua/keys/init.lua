@@ -7,7 +7,7 @@ vim.opt.hlsearch = true
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<cr>')
 
 -- Save file faster
-vim.keymap.set('n', '<C-s>', '<cmd>w<cr>')
+vim.keymap.set({'n','i'}, '<C-s>', '<cmd>w<cr>')
 
 -- Diagnostic keymaps
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous Diagnostic message' })
@@ -25,11 +25,12 @@ vim.keymap.set('t', '<S-Esc>', '<C-\\><C-n><cmd>ToggleTerm<cr>', { desc = 'Exit 
 -- vim.keymap.set('n', '<down>', '<cmd>echo "Use j to move!!"<cr>')
 
 -- TIP: Disable insert-mode CTRL+w to not get stuck closing browser tabs later
-vim.keymap.set('i', '<C-w>', function()
-  vim.notify('Use ctrl-backspace or <C-BS>', vim.log.levels.INFO, nil)
-end, { desc = 'No More Closing Browser Tabs by accident' })
+-- vim.keymap.set('i', '<C-w>', function()
+--   vim.notify('Use ctrl-backspace or <C-BS>', vim.log.levels.INFO, nil)
+-- end, { desc = 'No More Closing Browser Tabs by accident' })
+
 vim.keymap.set('i', '<C-BS>', '<C-w>', { desc = 'No More Closing Browser Tabs by accident' })
-vim.keymap.set('i', '<C-h>', '<C-w>', { desc = 'No More Closing Browser Tabs by accident' })
+vim.keymap.set('i', '<C-h>', '<C-w>',  { desc = 'No More Closing Browser Tabs by accident' })
 vim.keymap.set('i', '<M-BS>', '<C-w>', { desc = 'No More Closing Browser Tabs by accident' })
 
 -- Keybinds to make split navigation easier.
