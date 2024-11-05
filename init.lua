@@ -283,7 +283,7 @@ require('lazy').setup {
 
           -- Restart your LSP, useful when suggestions stop working.
           -- Hopefully you will rarely use this one.
-          map('<leader>cr', '<cmd>LspRestart<cr>', 'Restart Lsp' )
+          map('<leader>cr', '<cmd>LspRestart<cr><cmd>LspStart<cr>', 'Restart Lsp' )
 
           -- Fuzzy find all the symbols in your current buffer.
           --  Symbols are things like variables, functions, types, etc.
