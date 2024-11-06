@@ -28,15 +28,11 @@ return {
     },
   },
 
-  {
-    "folke/persistence.nvim",
-    event = "BufReadPre",
-    opts = {},
-    keys = {
-      { "<leader>qs", function() require('persistence').load() end, desc = "Quick Restore"},
-      { "<leader>qS", function() require('persistence').select() end, desc = "Select Session"},
-      { "<leader>ql", function() require('persistence').load({ last = true }) end, desc = "Quick_restore Last"},
-      { "<leader>qd", function() require('persistence').stop() end, desc = "Don't Save"},
+  { -- folke's quality of life plugin
+    "folke/snacks.nvim",
+    priority = 1000,
+    lazy = false,
+    opts = {
     },
   },
 
@@ -83,7 +79,7 @@ return {
     opts = {},
   },
 
-  { -- Harpoon 2 (fast buffer change)
+  { -- Harpoon 2 (fast buffer switch)
     'ThePrimeagen/harpoon',
     branch = 'harpoon2',
     commit = 'e76cb03', -- for when harpoon doesn't account for cd
@@ -97,6 +93,27 @@ return {
     config = function(opts)
       local harpoon = require 'harpoon'
       harpoon:setup { opts }
+
+      -- Sets up automatic add to list if list is short
+      local harpoon_auto_add = vim.api.nvim_create_augroup('harpoon_auto_add', { clear = true })
+      vim.api.nvim_create_autocmd({ 'BufEnter' }, {
+        group = harpoon_auto_add,
+        callback = function()
+          -- Only run in buffers that you can modify
+          if not vim.opt_local.modifiable:get() then
+            return
+          end
+          -- avoid oil buffers
+          if string.find(vim.api.nvim_buf_get_name(0),"^oil://") then
+            return
+          end
+          -- avoid overflow
+          if harpoon:list()._length > 4 then
+            return
+          end
+          harpoon:list():add()
+        end,
+      })
 
       vim.keymap.set('n', '<leader>a', function()
         harpoon:list():add()
