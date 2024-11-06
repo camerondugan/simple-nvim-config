@@ -28,12 +28,130 @@ return {
     },
   },
 
-  { -- folke's quality of life plugin
-    "folke/snacks.nvim",
+  {
+    'folke/snacks.nvim',
     priority = 1000,
     lazy = false,
+    ---@type snacks.Config
     opts = {
+      bigfile = { enabled = true },
+      notifier = { enabled = true },
+      quickfile = { enabled = true },
+      statuscolumn = { enabled = true },
+      words = { enabled = true },
     },
+    keys = {
+      {
+        '<leader>tn',
+        function()
+          Snacks.notifier:hide()
+        end,
+        desc = 'Dismiss All Notifications',
+      },
+      {
+        '<leader>bd',
+        function()
+          Snacks.bufdelete()
+        end,
+        desc = 'Delete Buffer',
+      },
+      {
+        '<leader>gg',
+        function()
+          Snacks.lazygit()
+        end,
+        desc = 'Lazygit',
+      },
+      -- { "<leader>gb", function() Snacks.git.blame_line() end, desc = "Git Blame Line" },
+      {
+        '<leader>gB',
+        function()
+          Snacks.gitbrowse()
+        end,
+        desc = 'Git Browse',
+      },
+      {
+        '<leader>gf',
+        function()
+          Snacks.lazygit.log_file()
+        end,
+        desc = 'Lazygit Current File History',
+      },
+      {
+        '<leader>gl',
+        function()
+          Snacks.lazygit.log()
+        end,
+        desc = 'Lazygit Log (cwd)',
+      },
+      {
+        '<leader>rf',
+        function()
+          Snacks.rename()
+        end,
+        desc = 'Rename File',
+      },
+      -- { "<c-/>",      function() Snacks.terminal() end, desc = "Toggle Terminal" },
+      -- { "<c-_>",      function() Snacks.terminal() end, desc = "which_key_ignore" },
+      {
+        ']]',
+        function()
+          Snacks.words.jump(vim.v.count1)
+        end,
+        desc = 'Next Reference',
+      },
+      {
+        '[[',
+        function()
+          Snacks.words.jump(-vim.v.count1)
+        end,
+        desc = 'Prev Reference',
+      },
+      {
+        '<leader>N',
+        desc = 'Neovim News',
+        function()
+          Snacks.win {
+            file = vim.api.nvim_get_runtime_file('doc/news.txt', false)[1],
+            width = 0.6,
+            height = 0.6,
+            wo = {
+              spell = false,
+              wrap = false,
+              signcolumn = 'yes',
+              statuscolumn = ' ',
+              conceallevel = 3,
+            },
+          }
+        end,
+      },
+    },
+    init = function()
+      vim.api.nvim_create_autocmd('User', {
+        pattern = 'VeryLazy',
+        callback = function()
+          -- Setup some globals for debugging (lazy-loaded)
+          _G.dd = function(...)
+            Snacks.debug.inspect(...)
+          end
+          _G.bt = function()
+            Snacks.debug.backtrace()
+          end
+          vim.print = _G.dd -- Override print to use snacks for `:=` command
+
+          -- Create some toggle mappings
+          Snacks.toggle.option('spell', { name = 'Spelling' }):map '<leader>ts'
+          Snacks.toggle.option('wrap', { name = 'Wrap' }):map '<leader>tw'
+          Snacks.toggle.option('relativenumber', { name = 'Relative Number' }):map '<leader>tL'
+          Snacks.toggle.diagnostics():map '<leader>td'
+          Snacks.toggle.line_number():map '<leader>tl'
+          Snacks.toggle.option('conceallevel', { off = 0, on = vim.o.conceallevel > 0 and vim.o.conceallevel or 2 }):map '<leader>tc'
+          Snacks.toggle.treesitter():map '<leader>tT'
+          Snacks.toggle.option('background', { off = 'light', on = 'dark', name = 'Dark Background' }):map '<leader>tb'
+          -- Snacks.toggle.inlay_hints():map("<leader>th")
+        end,
+      })
+    end,
   },
 
   {
@@ -45,17 +163,17 @@ return {
   },
 
   {
-    "folke/trouble.nvim",
-    opts = {focus = true,},
-    cmd = "Trouble",
+    'folke/trouble.nvim',
+    opts = { focus = true },
+    cmd = 'Trouble',
     keys = {
-      { "<leader>xx", "<cmd>Trouble diagnostics toggle<cr>", desc = "Diagnostics (Trouble)" },
-      { "<leader>xX", "<cmd>Trouble diagnostics toggle filter.buf=0<cr>", desc = "Buffer Diagnostics (Trouble)" },
-      { "<leader>xs", "<cmd>Trouble symbols toggle focus=false<cr>", desc = "Symbols (Trouble)" },
-      { "<leader>cl", "<cmd>Trouble lsp toggle focus win.position=right<cr>", desc = "LSP Definitions (Trouble)" },
-      { "<leader>xL", "<cmd>Trouble loclist toggle<cr>", desc = "Location List (Trouble)" },
-      { "<leader>xf", "<cmd>Trouble qflist toggle<cr>", desc = "Quickfix List (Trouble)" },
-    }
+      { '<leader>xx', '<cmd>Trouble diagnostics toggle<cr>', desc = 'Diagnostics (Trouble)' },
+      { '<leader>xX', '<cmd>Trouble diagnostics toggle filter.buf=0<cr>', desc = 'Buffer Diagnostics (Trouble)' },
+      { '<leader>xs', '<cmd>Trouble symbols toggle focus=false<cr>', desc = 'Symbols (Trouble)' },
+      { '<leader>cl', '<cmd>Trouble lsp toggle focus win.position=right<cr>', desc = 'LSP Definitions (Trouble)' },
+      { '<leader>xL', '<cmd>Trouble loclist toggle<cr>', desc = 'Location List (Trouble)' },
+      { '<leader>xf', '<cmd>Trouble qflist toggle<cr>', desc = 'Quickfix List (Trouble)' },
+    },
   },
 
   { -- Auto-Save buffers
@@ -104,7 +222,7 @@ return {
             return
           end
           -- avoid oil buffers
-          if string.find(vim.api.nvim_buf_get_name(0),"^oil://") then
+          if string.find(vim.api.nvim_buf_get_name(0), '^oil://') then
             return
           end
           -- avoid overflow

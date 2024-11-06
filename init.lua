@@ -107,7 +107,6 @@ require('lazy').setup {
       -- Telescope picker. This is really useful to discover what Telescope can
       -- do as well as how to actually do it!
 
-
       -- [[ Configure Telescope ]]
       -- See `:help telescope` and `:help telescope.setup()`
       require('telescope').setup {
@@ -148,10 +147,9 @@ require('lazy').setup {
       vim.keymap.set('n', '<leader>sw', builtin.grep_string, { desc = 'Search current Word' })
       vim.keymap.set('n', '<leader>sg', builtin.live_grep, { desc = 'Search by Grep' })
       vim.keymap.set('n', '<leader>sD', builtin.diagnostics, { desc = 'Search Diagnostics' })
-      vim.keymap.set('n', '<leader>sr', builtin.resume, { desc = 'Search Resume' })
-      vim.keymap.set('n', '<leader>s.', builtin.oldfiles, { desc = 'Search Recent Files ("." for repeat)' })
+      vim.keymap.set('n', '<leader>s.', builtin.resume, { desc = 'Search Resume' })
+      vim.keymap.set('n', '<leader>so', builtin.oldfiles, { desc = 'Search Old Files' })
       vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = 'Find existing buffers' })
-
 
       -- Slightly advanced example of overriding default behavior and theme
       vim.keymap.set('n', '<leader>/', function()
@@ -283,7 +281,7 @@ require('lazy').setup {
 
           -- Restart your LSP, useful when suggestions stop working.
           -- Hopefully you will rarely use this one.
-          map('<leader>cr', '<cmd>LspRestart<cr><cmd>LspStart<cr>', 'Restart Lsp' )
+          map('<leader>cr', '<cmd>LspRestart<cr><cmd>LspStart<cr>', 'Restart Lsp')
 
           -- Fuzzy find all the symbols in your current buffer.
           --  Symbols are things like variables, functions, types, etc.
@@ -381,23 +379,33 @@ require('lazy').setup {
 
       -- Anything not from mason / cannot run without dynamic linking
       require('lspconfig').gdscript.setup {}
-      require('lspconfig').rust_analyzer.setup { }
+      require('lspconfig').rust_analyzer.setup {}
+      require('lspconfig').nixd.setup {
+        cmd = { 'nixd' },
+        settings = {
+          nixd = {
+            nixpkgs = {
+              expr = 'import <nixpkgs> { }',
+            },
+          },
+        },
+      }
       require('lspconfig').nil_ls.setup {}
       require('lspconfig').typos_lsp.setup {}
       require('lspconfig').yamlls.setup {}
       require('lspconfig').lua_ls.setup {
-          -- cmd = {...},
-          -- filetypes = { ...},
-          -- capabilities = {},
-          settings = {
-            Lua = {
-              completion = {
-                callSnippet = 'Replace',
-              },
-              -- You can toggle below to ignore Lua_LS's noisy `missing-fields` warnings
-              -- diagnostics = { disable = { 'missing-fields' } },
+        -- cmd = {...},
+        -- filetypes = { ...},
+        -- capabilities = {},
+        settings = {
+          Lua = {
+            completion = {
+              callSnippet = 'Replace',
             },
+            -- You can toggle below to ignore Lua_LS's noisy `missing-fields` warnings
+            -- diagnostics = { disable = { 'missing-fields' } },
           },
+        },
       }
 
       -- Ensure the servers and tools above are installed
@@ -413,7 +421,6 @@ require('lazy').setup {
       local ensure_installed = vim.tbl_keys(servers or {})
       vim.list_extend(ensure_installed, {
         -- formatters
-        'stylua', -- Used to format Lua code
         'asmfmt',
         'autopep8',
         'black', -- python
@@ -439,6 +446,7 @@ require('lazy').setup {
         'proselint',
         'shellcheck',
         'shellharden',
+        'nixpkgs-fmt',
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
@@ -484,6 +492,7 @@ require('lazy').setup {
         rust = { 'rustfmt' },
         dart = { 'dart_format' },
         sh = { 'shellharden', 'shfmt' },
+        nix = { 'alejandra' },
         text = {},
         ['*'] = { 'trim_whitespace', 'codespell' },
       },
@@ -495,7 +504,7 @@ require('lazy').setup {
     event = 'InsertEnter',
     dependencies = {
       -- Snippet Engine & its associated nvim-cmp source
-      {'hrsh7th/cmp-nvim-lsp-signature-help'},
+      { 'hrsh7th/cmp-nvim-lsp-signature-help' },
       {
         'L3MON4D3/LuaSnip',
         build = (function()
@@ -583,11 +592,11 @@ require('lazy').setup {
           },
           { name = 'nvim_lsp', max_item_count = 3 },
           { name = 'nvim_lsp_signature_help', max_item_count = 3 },
-          { name = 'luasnip', max_item_count = 3},
-          { name = 'orgmode', max_item_count = 3},
+          { name = 'luasnip', max_item_count = 3 },
+          { name = 'orgmode', max_item_count = 3 },
           { name = 'path', max_item_count = 3, keyword_length = 2 },
           { name = 'rg', max_item_count = 3, keyword_length = 2 },
-          { name = 'calc', max_item_count = 3},
+          { name = 'calc', max_item_count = 3 },
           -- { name = 'buffer', keyword_length = 4 }, -- rg supersedes buffer
         },
       }
@@ -619,7 +628,7 @@ require('lazy').setup {
       vim.cmd.hi 'Comment gui=none'
     end,
     opts = {
-      flavor = "mocha",
+      flavor = 'mocha',
       transparent_background = true,
       integrations = {
         harpoon = true,
@@ -630,14 +639,15 @@ require('lazy').setup {
         fzf = true,
         telescope = {
           enabled = true,
-          style = "nvchad",
+          style = 'nvchad',
         },
       },
     },
   },
 
   -- Highlight todo, notes, etc in comments
-  { 'folke/todo-comments.nvim',
+  {
+    'folke/todo-comments.nvim',
     dependencies = { 'nvim-lua/plenary.nvim' },
     event = 'VimEnter',
     opts = { signs = false },
@@ -666,7 +676,7 @@ require('lazy').setup {
         mode = 'n',
         desc = 'Todos All (Trouble)',
       },
-    }
+    },
   },
 
   { -- Collection of various small independent plugins/modules
