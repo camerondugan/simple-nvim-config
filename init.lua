@@ -493,6 +493,7 @@ require('lazy').setup {
         dart = { 'dart_format' },
         sh = { 'shellharden', 'shfmt' },
         nix = { 'alejandra' },
+        gdscript = { 'gdformat' },
         text = {},
         ['*'] = { 'trim_whitespace', 'codespell' },
       },
@@ -614,37 +615,20 @@ require('lazy').setup {
       require('lsp_signature').setup(opts)
     end,
   },
-  { -- colorscheme
-    'catppuccin/nvim',
-    name = 'catppuccin',
+  -- Or with configuration
+  {
+    'projekt0n/github-nvim-theme',
+    name = 'github-theme',
     lazy = false, -- make sure we load this during startup if it is your main colorscheme
     priority = 1000, -- make sure to load this before all the other start plugins
-    config = function(opts)
-      require('catppuccin').setup(opts)
-      -- Load the colorscheme here
-      vim.cmd.colorscheme 'catppuccin'
+    config = function()
+      require('github-theme').setup({
+        -- ...
+      })
 
-      -- You can configure highlights by doing something like
-      vim.cmd.hi 'Comment gui=none'
+      vim.cmd('colorscheme github_dark_default')
     end,
-    opts = {
-      flavor = 'mocha',
-      transparent_background = true,
-      integrations = {
-        harpoon = true,
-        gitsigns = true,
-        markdown = true,
-        which_key = true,
-        mason = true,
-        fzf = true,
-        telescope = {
-          enabled = true,
-          style = 'nvchad',
-        },
-      },
-    },
   },
-
   -- Highlight todo, notes, etc in comments
   {
     'folke/todo-comments.nvim',

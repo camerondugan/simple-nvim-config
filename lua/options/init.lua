@@ -88,6 +88,9 @@ vim.opt.cursorline = true
 -- Minimal number of screen lines to keep above and below the cursor.
 vim.opt.scrolloff = 10
 
+-- Set <C-d> and <C-u> jump distance to half screen again
+vim.opt.scroll = 0
+
 -- Plugin Options
 vim.opt.termguicolors = true
 
