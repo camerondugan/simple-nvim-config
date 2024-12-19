@@ -1,5 +1,21 @@
 -- luacheck: ignore 113 -- ignores undefined vim var
 return {
+  { -- Completion
+    'saghen/blink.cmp',
+    dependencies = 'rafamadriz/friendly-snippets',
+    version = 'v0.*',
+    opts = {
+      keymap = { preset = 'default' },
+
+      appearance = {
+        use_nvim_cmp_as_default = true,
+        nerd_font_variant = 'mono',
+      },
+
+      signature = { enabled = true }
+    },
+    opts_extend = { 'sources.default' },
+  },
   { -- File explorer
     'stevearc/oil.nvim',
     dependencies = { 'nvim-tree/nvim-web-devicons' },

@@ -203,6 +203,7 @@ require('lazy').setup {
       { 'j-hui/fidget.nvim', opts = {} },
 
       -- Allows extra capabilities provided by nvim-cmp
+      'saghen/blink.cmp',
       'hrsh7th/cmp-nvim-lsp',
     },
     config = function()
@@ -343,7 +344,8 @@ require('lazy').setup {
       --  By default, Neovim doesn't support everything that is in the LSP specification.
       --  When you add nvim-cmp, luasnip, etc. Neovim now has *more* capabilities.
       --  So, we create new capabilities with nvim cmp, and then broadcast that to the servers.
-      local capabilities = vim.lsp.protocol.make_client_capabilities()
+      local capabilities = require('blink.cmp').get_lsp_capabilities()
+      -- local capabilities = vim.lsp.protocol.make_client_capabilities()
       capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())
 
       -- Enable the following language servers
@@ -451,6 +453,8 @@ require('lazy').setup {
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
       require('mason-lspconfig').setup {
+        ensure_installed = {},
+        automatic_installation = false,
         handlers = {
           function(server_name)
             local server = servers[server_name] or {}
@@ -563,9 +567,9 @@ require('lazy').setup {
 
           -- If you prefer more traditional completion keymaps,
           -- you can uncomment the following lines
-          ['<CR>'] = cmp.mapping.confirm { select = true },
-          ['<Tab>'] = cmp.mapping.select_next_item(),
-          ['<S-Tab>'] = cmp.mapping.select_prev_item(),
+          -- ['<CR>'] = cmp.mapping.confirm { select = true },
+          -- ['<Tab>'] = cmp.mapping.select_next_item(),
+          -- ['<S-Tab>'] = cmp.mapping.select_prev_item(),
 
           -- Manually trigger a completion from nvim-cmp.
           --  Generally you don't need this, because nvim-cmp will display
@@ -592,7 +596,7 @@ require('lazy').setup {
             group_index = 0,
           },
           { name = 'nvim_lsp', max_item_count = 3 },
-          { name = 'nvim_lsp_signature_help', max_item_count = 3 },
+          -- { name = 'nvim_lsp_signature_help', max_item_count = 3 },
           { name = 'luasnip', max_item_count = 3 },
           { name = 'orgmode', max_item_count = 3 },
           { name = 'path', max_item_count = 3, keyword_length = 2 },
@@ -603,18 +607,18 @@ require('lazy').setup {
       }
     end,
   },
-  -- Show function signature while typing
-  {
-    'ray-x/lsp_signature.nvim',
-    event = 'VeryLazy',
-    opts = {
-      floating_window = false,
-      hint_prefix = '',
-    },
-    config = function(_, opts)
-      require('lsp_signature').setup(opts)
-    end,
-  },
+  -- -- Show function signature while typing
+  -- {
+  --   'ray-x/lsp_signature.nvim',
+  --   event = 'VeryLazy',
+  --   opts = {
+  --     floating_window = false,
+  --     hint_prefix = '',
+  --   },
+  --   config = function(_, opts)
+  --     require('lsp_signature').setup(opts)
+  --   end,
+  -- },
   -- Or with configuration
   {
     'projekt0n/github-nvim-theme',
