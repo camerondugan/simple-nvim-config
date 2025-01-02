@@ -382,6 +382,7 @@ require('lazy').setup {
       -- Anything not from mason / cannot run without dynamic linking
       require('lspconfig').gdscript.setup {}
       require('lspconfig').rust_analyzer.setup {}
+      require('lspconfig').gleam.setup {}
       require('lspconfig').nixd.setup {
         cmd = { 'nixd' },
         settings = {
