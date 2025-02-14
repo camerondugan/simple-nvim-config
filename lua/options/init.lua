@@ -113,7 +113,7 @@ vim.diagnostic.config {
   },
   update_in_insert = false,
   float = {
-    border = 'rounded',
+    -- border = 'rounded',
     source = true,
   },
 }
