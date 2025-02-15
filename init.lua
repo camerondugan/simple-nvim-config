@@ -17,6 +17,20 @@ vim.opt.rtp:prepend(lazypath)
 require('lazy').setup {
   'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
 
+  {
+    'projekt0n/github-nvim-theme',
+    name = 'github-theme',
+    lazy = false, -- make sure we load this during startup if it is your main colorscheme
+    priority = 1000, -- make sure to load this before all the other start plugins
+    config = function()
+      require('github-theme').setup {
+        -- ...
+      }
+
+      vim.cmd 'colorscheme github_dark_default'
+    end,
+  },
+
   { -- Adds git related signs to the gutter, as well as utilities for managing changes
     'lewis6991/gitsigns.nvim',
     opts = {
@@ -40,24 +54,18 @@ require('lazy').setup {
       -- Document existing key chains
       -- Normal Mode
       wk.add {
+        { '<leader>b', group = 'Buffer' },
         { '<leader>c', group = 'Code' },
-        { '<leader>c_', hidden = true },
-        { '<leader>d', group = 'Document' },
-        { '<leader>d_', hidden = true },
+        { '<leader>d', group = 'Debug' },
         { '<leader>g', group = 'Git' },
-        { '<leader>g_', hidden = true },
         { '<leader>m', group = 'Markdown' },
-        { '<leader>m_', hidden = true },
         { '<leader>o', group = 'OrgMode' },
-        { '<leader>o_', hidden = true },
         { '<leader>p', group = 'Preview' },
-        { '<leader>p_', hidden = true },
         { '<leader>r', group = 'Refactor' },
-        { '<leader>r_', hidden = true },
         { '<leader>s', group = 'Search' },
-        { '<leader>s_', hidden = true },
         { '<leader>t', group = 'Toggle' },
-        { '<leader>t_', hidden = true },
+        { '<leader>u', group = 'Toggle' },
+        { '<leader>x', group = 'Trouble' },
       }
     end,
   },
@@ -176,10 +184,10 @@ require('lazy').setup {
 
           -- Opens a popup that displays documentation about the word under your cursor
           --  See `:help K` for why this keymap.
-          map('K', vim.lsp.buf.hover, 'Hover Documentation')
+          -- map('K', vim.lsp.buf.hover, 'Hover Documentation')
 
           -- WARN: This is not Goto Definition, this is Goto Declaration.
-          map('gD', vim.lsp.buf.declaration, 'Goto Declaration')
+          -- map('gD', vim.lsp.buf.declaration, 'Goto Declaration')
 
           -- The following two autocommands are used to highlight references of the
           -- word under your cursor when your cursor rests there for a little while.
@@ -318,6 +326,7 @@ require('lazy').setup {
         -- 'gofumpt',
         'goimports',
         'golines',
+        'google-java-format',
         'gomodifytags',
         'isort',
         'prettier',
@@ -374,9 +383,9 @@ require('lazy').setup {
       notify_on_error = false,
       formatters_by_ft = {
         go = { 'goimports', 'golines', 'gofmt' }, -- a then b then c
-        java = { 'clang-format' },
-        javascript = { { 'prettierd', 'prettier' } }, -- a or b
-        json = { 'clang-format' },
+        java = { 'google-java-format' },
+        javascript = { 'prettierd', 'prettier', stop_after_first = true }, -- a or b
+        json = { 'prettierd', 'prettier', stop_after_first = true },
         lua = { 'stylua' },
         protobuf = { 'clang-format' },
         python = { 'isort', 'black' },
@@ -404,36 +413,44 @@ require('lazy').setup {
     end,
   },
   -- Or with configuration
-    -- Highlight todo, notes, etc in comments
+  -- Highlight todo, notes, etc in comments
   {
     'folke/todo-comments.nvim',
     dependencies = { 'nvim-lua/plenary.nvim' },
     event = 'VimEnter',
     opts = { signs = false },
     keys = {
-      -- {
-      --   '<leader>sT',
-      --   '<cmd>TodoTelescope<cr>',
-      --   mode = 'n',
-      --   desc = 'Todos (Telescope)',
-      -- },
+      {
+        '<leader>st',
+        function()
+          Snacks.picker.todo_comments()
+        end,
+        desc = 'Todo',
+      },
+      {
+        '<leader>sT',
+        function()
+          Snacks.picker.todo_comments { keywords = { 'TODO', 'FIX', 'FIXME' } }
+        end,
+        desc = 'Todo/Fix/Fixme',
+      },
       {
         '<leader>xi',
         '<cmd>Trouble todo filter = {tag = {NOTE,WARNING,HACK,PERF}}<cr>',
         mode = 'n',
-        desc = 'Todos (Trouble)',
+        desc = 'Todos',
       },
       {
         '<leader>xt',
         '<cmd>Trouble todo filter = {tag = {TODO,FIX,FIXME}}<cr>',
         mode = 'n',
-        desc = 'Todos (Trouble)',
+        desc = 'Todos',
       },
       {
         '<leader>xT',
         '<cmd>Trouble todo = {tag = {TODO,FIX,FIXME}}<cr>',
         mode = 'n',
-        desc = 'Todos All (Trouble)',
+        desc = 'Todos All',
       },
     },
   },
@@ -456,6 +473,7 @@ require('lazy').setup {
       -- require('mini.pairs').setup() -- Auto add ([{' pairs
       -- ... And there is more!
       --  Check out: https://github.com/echasnovski/mini.nvim
+      require('mini.sessions').setup { autoread = true }
     end,
   },
   { -- Highlight, edit, and navigate code
@@ -464,7 +482,7 @@ require('lazy').setup {
     main = 'nvim-treesitter.configs', -- Sets main module to use for opts
     -- [[ Configure Treesitter ]] See `:help nvim-treesitter`
     opts = {
-      ensure_installed = { 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc' },
+      -- ensure_installed = { 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc' },
       -- Autoinstall languages that are not installed
       auto_install = true,
       highlight = {
