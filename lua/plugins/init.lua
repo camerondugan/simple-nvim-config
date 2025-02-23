@@ -124,9 +124,10 @@ return {
     },
   },
 
-  { -- Wraps based on file info
-    'andrewferrier/wrapping.nvim',
-    opts = {},
+  {
+    'windwp/nvim-ts-autotag',
+    -- lazy=false,
+    opts={},
   },
 
   { -- Markdown Preview
