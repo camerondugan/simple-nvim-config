@@ -15,6 +15,7 @@ return {
     },
     opts_extend = { 'sources.default' },
   },
+
   { -- File explorer
     'stevearc/oil.nvim',
     dependencies = { 'nvim-tree/nvim-web-devicons' },
@@ -90,16 +91,6 @@ return {
     opts = {},
   },
 
-  { -- Shows what you are editing in the top bar if off screen
-    'nvim-treesitter/nvim-treesitter-context',
-    dependencies = { 'nvim-treesitter/nvim-treesitter' },
-    opts = {
-      enable = true,
-      max_lines = 9,
-      multiline_threshold = 1,
-    },
-  },
-
   { -- Refactoring (fast multi-lang Refactor command)
     'ThePrimeagen/refactoring.nvim',
     dependencies = {
@@ -124,7 +115,7 @@ return {
     },
   },
 
-  {
+  { -- Better html and xml tagging
     'windwp/nvim-ts-autotag',
     -- lazy=false,
     opts={},
