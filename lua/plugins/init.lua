@@ -1,17 +1,55 @@
 return {
   { -- Completion
     'saghen/blink.cmp',
-    dependencies = 'rafamadriz/friendly-snippets',
+    dependencies = {
+      'rafamadriz/friendly-snippets',
+      'disrupted/blink-cmp-conventional-commits',
+    },
     version = 'v0.*',
     opts = {
       keymap = { preset = 'default' },
+
+      sources = {
+        default = {
+          'lazydev',
+          'conventional_commits',
+          'lsp',
+          'buffer',
+          'snippets',
+          'path'
+        },
+        providers = {
+          conventional_commits = {
+            name = 'Conventional Commits',
+            module = 'blink-cmp-conventional-commits',
+            enabled = function()
+              return vim.bo.filetype == 'gitcommit'
+            end,
+            ---@module 'blink-cmp-conventional-commits'
+            ---@type blink-cmp-conventional-commits.Options
+            opts = {}, -- none so far
+            score_offset = 100, -- top priority
+          },
+          lazydev = {
+            name = "LazyDev",
+            module = "lazydev.integrations.blink",
+            enabled = function()
+              return vim.bo.filetype == 'lua'
+            end,
+            score_offset = 100, -- top priority
+          },
+        },
+      },
 
       appearance = {
         use_nvim_cmp_as_default = true,
         nerd_font_variant = 'mono',
       },
 
-      signature = { enabled = true },
+      signature = {
+        enabled = true,
+        window = { show_documentation = false },
+      },
     },
     opts_extend = { 'sources.default' },
   },
@@ -44,7 +82,7 @@ return {
       },
     },
     keys = {
-      {"-", '<cmd>Oil<cr>', { desc = "Open parent directory"}}
+      { '-', '<cmd>Oil<cr>', { desc = 'Open parent directory' } },
     },
   },
 
@@ -118,7 +156,7 @@ return {
   { -- Better html and xml tagging
     'windwp/nvim-ts-autotag',
     -- lazy=false,
-    opts={},
+    opts = {},
   },
 
   { -- Markdown Preview
@@ -135,6 +173,39 @@ return {
       },
       -- markdown preview
       { '<leader>mp', '<cmd>MarkdownPreviewToggle<cr>', desc = 'Markdown' },
+    },
+  },
+
+  { -- Code snapshot
+    'mistricky/codesnap.nvim',
+    build = 'make',
+    opts = {
+      code_font_family = 'JetBrainsMono Nerd Font',
+      has_breadcrumbs = true,
+      has_line_number = true,
+      bg_x_padding = 20,
+      bg_y_padding = 20,
+      bg_color = '#535c68',
+    },
+    keys = {
+      { -- copy
+        '<leader>cc',
+        '<cmd>CodeSnap &filetype<cr>',
+        mode = 'x',
+        desc = 'Copy selected code snapshot',
+      },
+      { -- save
+        '<leader>cs',
+        '<cmd>CodeSnapSave &filetype<cr>',
+        mode = 'x',
+        desc = 'Save selected code snapshot in ~/Pictures',
+      },
+      { -- ASCII
+        '<leader>ci',
+        '<cmd>CodeSnapASCII &filetype<cr>',
+        mode = 'x',
+        desc = 'Copy selected as ASCII',
+      },
     },
   },
 }
