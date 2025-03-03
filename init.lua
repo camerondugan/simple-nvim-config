@@ -11,7 +11,7 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
   if vim.v.shell_error ~= 0 then
     error('Error cloning lazy.nvim:\n' .. out)
   end
-end ---@diagnostic disable-next-line: undefined-field
+end
 vim.opt.rtp:prepend(lazypath)
 
 require('lazy').setup {
@@ -211,7 +211,7 @@ require('lazy').setup {
     end,
   },
 
-  { -- Auto format
+  { -- Better format
     'stevearc/conform.nvim',
     event = { 'BufWritePre' },
     cmd = { 'ConformInfo' },
@@ -295,13 +295,22 @@ require('lazy').setup {
       require('mini.surround').setup()
       require('mini.pairs').setup() -- Auto add ([{' pairs
       require('mini.diff').setup {
-        view = { style = 'sign', signs = {
-          add = '+',
-          change = '~',
-          delete = '_',
-        } },
-      } -- git diff
+        -- view = { style = 'sign', signs = {
+        --   add = '+',
+        --   change = '~',
+        --   delete = '_',
+        -- } },
+        mappings = {
+          apply = 'gh', -- apply git hunk (stage)
+          reset = 'gr', -- reset git hunk
+          goto_prev = '[c', -- navigate hunks
+          goto_next = ']c',
+          goto_first = '[C',
+          goto_last = ']C',
+        },
+      }
 
+      vim.keymap.set('n', '<leader>gd', MiniDiff.toggle_overlay, {})
       -- ... And there is more!
       --  Check out: https://github.com/echasnovski/mini.nvim
       require('mini.sessions').setup { autoread = true }
