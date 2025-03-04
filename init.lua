@@ -294,6 +294,7 @@ require('lazy').setup {
       require('mini.ai').setup { n_lines = 500 }
       require('mini.surround').setup()
       require('mini.pairs').setup() -- Auto add ([{' pairs
+      require('mini.map').setup() -- Auto add ([{' pairs
       require('mini.diff').setup {
         -- view = { style = 'sign', signs = {
         --   add = '+',
@@ -311,6 +312,8 @@ require('lazy').setup {
       }
 
       vim.keymap.set('n', '<leader>gd', MiniDiff.toggle_overlay, {})
+      vim.keymap.set('n', '<Leader>um', MiniMap.toggle)
+
       -- ... And there is more!
       --  Check out: https://github.com/echasnovski/mini.nvim
       require('mini.sessions').setup { autoread = true }
