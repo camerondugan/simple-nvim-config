@@ -60,6 +60,7 @@ return {
       { '<leader>/', function() Snacks.picker.lines() end, desc = 'Search Lines', },
       { '<leader>:', function() Snacks.picker.command_history() end, desc = 'Command History', },
       { '<leader>n', function() Snacks.picker.notifications() end, desc = 'Notification History', },
+      { '<leader>z', function() Snacks.picker.zoxide() end, desc = 'Search Zoxide', },
       -- find
       { '<leader>sb', function() Snacks.picker.buffers() end, desc = 'Buffers', },
       { '<leader>sc', function() Snacks.picker.files { cwd = vim.fn.stdpath 'config' } end, desc = 'Find Config File', },
