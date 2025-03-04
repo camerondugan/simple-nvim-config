@@ -28,12 +28,12 @@ return {
     keys = {
       { '<leader>tn', function() Snacks.notifier:hide() end, desc = 'Dismiss All Notifications', },
       { '<leader>bd', function() Snacks.bufdelete() end, desc = 'Delete Buffer', },
-      { '<leader>rf', function() Snacks.rename() end, desc = 'Rename File', },
+      { '<leader>rf', function() Snacks.rename.rename_file() end, desc = 'Rename File', },
       -- Terminal
       { '<c-/>', function() Snacks.terminal.toggle() end, desc = 'Toggle Terminal', },
       { '<c-/>', function() Snacks.terminal.toggle() end, mode = 't', desc = 'Toggle Terminal', },
       -- Words
-      { ']]', function() Snacks.words.jump(vim.v.count1) end, desc = 'Next Reference', }, 
+      { ']]', function() Snacks.words.jump(vim.v.count1) end, desc = 'Next Reference', },
       { '[[', function() Snacks.words.jump(-vim.v.count1) end, desc = 'Prev Reference', },
       -- Windows
       {
@@ -141,7 +141,7 @@ return {
           Snacks.toggle.option('background', { off = 'light', on = 'dark', name = 'Dark Background' }):map '<leader>ub'
           Snacks.toggle.inlay_hints():map '<leader>uh'
           Snacks.toggle.indent():map '<leader>ug'
-          Snacks.toggle.dim():map '<leader>td'
+          Snacks.toggle.dim():map '<leader>uz'
         end,
       })
     end,

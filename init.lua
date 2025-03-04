@@ -303,7 +303,7 @@ require('lazy').setup {
         -- } },
         mappings = {
           apply = 'gh', -- apply git hunk (stage)
-          reset = 'gr', -- reset git hunk
+          reset = 'gH', -- reset git hunk
           goto_prev = '[c', -- navigate hunks
           goto_next = ']c',
           goto_first = '[C',
