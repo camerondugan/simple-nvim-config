@@ -48,6 +48,9 @@ vim.opt.spell = true
 -- Enable wrap by word
 vim.opt.linebreak = true
 
+-- Disable wrap by default
+vim.opt.wrap = false
+
 -- Save undo history
 vim.opt.undofile = true
 
@@ -117,3 +120,6 @@ vim.diagnostic.config {
     source = true,
   },
 }
+
+-- My tweaks on the default
+vim.api.nvim_set_hl(0, "Statement", { fg = "NvimLightMagenta", bold = true})
