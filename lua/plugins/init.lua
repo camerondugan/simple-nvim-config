@@ -1,3 +1,4 @@
+-- luacheck: ignore 113 -- ignores undefined vim var
 return {
   { -- Completion
     'saghen/blink.cmp',
@@ -27,7 +28,7 @@ return {
             end,
             ---@module 'blink-cmp-conventional-commits'
             ---@type blink-cmp-conventional-commits.Options
-            opts = {}, -- none so far
+            opts = {},          -- none so far
             score_offset = 100, -- top priority
           },
           lazydev = {
@@ -99,12 +100,12 @@ return {
     opts = { focus = true },
     cmd = 'Trouble',
     keys = {
-      { '<leader>xx', '<cmd>Trouble diagnostics toggle<cr>', desc = 'Diagnostics (Trouble)' },
-      { '<leader>xX', '<cmd>Trouble diagnostics toggle filter.buf=0<cr>', desc = 'Buffer Diagnostics (Trouble)' },
-      { '<leader>xs', '<cmd>Trouble symbols toggle focus=false<cr>', desc = 'Symbols (Trouble)' },
+      { '<leader>xx', '<cmd>Trouble diagnostics toggle<cr>',                  desc = 'Diagnostics (Trouble)' },
+      { '<leader>xX', '<cmd>Trouble diagnostics toggle filter.buf=0<cr>',     desc = 'Buffer Diagnostics (Trouble)' },
+      { '<leader>xs', '<cmd>Trouble symbols toggle focus=false<cr>',          desc = 'Symbols (Trouble)' },
       { '<leader>cl', '<cmd>Trouble lsp toggle focus win.position=right<cr>', desc = 'LSP Definitions (Trouble)' },
-      { '<leader>xL', '<cmd>Trouble loclist toggle<cr>', desc = 'Location List (Trouble)' },
-      { '<leader>xf', '<cmd>Trouble qflist toggle<cr>', desc = 'Quickfix List (Trouble)' },
+      { '<leader>xL', '<cmd>Trouble loclist toggle<cr>',                      desc = 'Location List (Trouble)' },
+      { '<leader>xf', '<cmd>Trouble qflist toggle<cr>',                       desc = 'Quickfix List (Trouble)' },
     },
   },
 
@@ -124,10 +125,7 @@ return {
     },
   },
 
-  { -- Highlight colors from hex or other color codes
-    'brenoprata10/nvim-highlight-colors',
-    opts = {},
-  },
+  'brenoprata10/nvim-highlight-colors',
 
   { -- Refactoring (fast multi-lang Refactor command)
     'ThePrimeagen/refactoring.nvim',
@@ -145,28 +143,17 @@ return {
     end,
   },
 
-  { -- Notes and organization
-    'nvim-orgmode/orgmode',
-    opts = {
-      org_agenda_files = '~/Notes/**',
-      org_default_notes_file = '~/Notes/index.org',
-    },
-  },
+  'windwp/nvim-ts-autotag',
 
-  { -- Better html and xml tagging
-    'windwp/nvim-ts-autotag',
-    -- lazy=false,
-    opts = {},
-  },
-
-  { -- Markdown Preview
+  -- Markdown Preview
+  {
     'iamcco/markdown-preview.nvim',
     ft = { 'markdown' }, -- only loads in markdown files
     build = function()
       vim.fn['mkdp#util#install']()
     end,
     keys = { -- only load if these key binds are pressed
-      { -- preview markdown
+      {      -- preview markdown
         '<leader>pm',
         '<cmd>MarkdownPreviewToggle<cr>',
         desc = 'Markdown',

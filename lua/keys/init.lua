@@ -6,7 +6,7 @@ vim.opt.hlsearch = true
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<cr>')
 
 -- Save file faster
-vim.keymap.set({'n','i'}, '<C-s>', '<cmd>w<cr>')
+vim.keymap.set({ 'n', 'i' }, '<C-s>', '<cmd>w<cr>')
 
 -- Diagnostic keymaps
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous Diagnostic message' })
@@ -15,7 +15,7 @@ vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Error mess
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Quickfix list' })
 
 vim.keymap.set('i', '<C-BS>', '<C-w>', { desc = 'No More Closing Browser Tabs by accident' })
-vim.keymap.set('i', '<C-h>', '<C-w>',  { desc = 'No More Closing Browser Tabs by accident' })
+vim.keymap.set('i', '<C-h>', '<C-w>', { desc = 'No More Closing Browser Tabs by accident' })
 vim.keymap.set('i', '<M-BS>', '<C-w>', { desc = 'No More Closing Browser Tabs by accident' })
 
 -- Keybinds to make split navigation easier.

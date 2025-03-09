@@ -3,7 +3,7 @@ require 'options'
 require 'keys'
 require 'autocommands'
 
--- [[ Install `lazy.nvim` plugin manager ]]
+-- Install `lazy.nvim` plugin manager
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
   local lazyrepo = 'https://github.com/folke/lazy.nvim.git'
@@ -15,9 +15,9 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require('lazy').setup {
-  'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
+  'tpope/vim-sleuth',   -- Detect expandtab and shiftwidth automatically
 
-  { -- Useful plugin to show you pending keybinds.
+  {                     -- Useful plugin to show you pending keybinds.
     'folke/which-key.nvim',
     event = 'VimEnter', -- Sets the loading event to 'VimEnter'
     config = function() -- This is the function that runs, AFTER loading
@@ -60,12 +60,12 @@ require('lazy').setup {
     'neovim/nvim-lspconfig',
     dependencies = {
       -- Automatically install LSPs and related tools to stdpath for Neovim
-      { 'williamboman/mason.nvim', config = true }, -- NOTE: Must be loaded before dependants
+      { 'williamboman/mason.nvim', config = true }, -- NOTE: Must be loaded before dependents
       'williamboman/mason-lspconfig.nvim',
       'WhoIsSethDaniel/mason-tool-installer.nvim',
 
       -- Useful status updates for LSP.
-      { 'j-hui/fidget.nvim', opts = {} },
+      'j-hui/fidget.nvim',
 
       -- Allows extra capabilities provided by nvim-cmp
       'saghen/blink.cmp',
@@ -119,7 +119,7 @@ require('lazy').setup {
         docker_compose_language_service = default,
         gopls = default,
         gradle_ls = default,
-        jdtls = default, -- java LSP
+        jdtls = default,   -- java LSP
         jsonls = default,
         lemminx = default, -- XML
         luacheck = default,
@@ -182,11 +182,11 @@ require('lazy').setup {
         -- linters
         'htmlhint',
         'golangci-lint', -- golang
-        'markdownlint', -- markdown
+        'markdownlint',  -- markdown
         'quick-lint-js', -- javascript
-        'yamllint', -- yaml
-        'jsonlint', -- json
-        'hadolint', -- docker file
+        'yamllint',      -- yaml
+        'jsonlint',      -- json
+        'hadolint',      -- docker file
         'proselint',
         'shellcheck',
         'shellharden',
@@ -219,7 +219,7 @@ require('lazy').setup {
       {
         '<leader>f',
         function()
-          require('conform').format { async = true, lsp_format = 'fallback' }
+          require('conform').format { async = true, lsp_format = 'prefer' }
         end,
         mode = '',
         desc = 'Format buffer',
@@ -228,7 +228,7 @@ require('lazy').setup {
     opts = {
       notify_on_error = false,
       formatters_by_ft = {
-        go = { 'goimports', 'golines', 'gofmt' }, -- a then b then c
+        go = { 'goimports', 'golines', 'gofmt' },                          -- a then b then c
         java = { 'google-java-format' },
         javascript = { 'prettierd', 'prettier', stop_after_first = true }, -- a or b
         json = { 'prettierd', 'prettier', stop_after_first = true },
@@ -286,15 +286,15 @@ require('lazy').setup {
       },
     },
   },
-
-  { -- Collection of various small independent plugins/modules
+  -- Collection of various small independent plugins/modules
+  {
     'echasnovski/mini.nvim',
     dependencies = { 'hrsh7th/nvim-cmp' }, --pairs
     config = function()
       require('mini.ai').setup { n_lines = 500 }
       require('mini.surround').setup()
       require('mini.pairs').setup() -- Auto add ([{' pairs
-      require('mini.map').setup() -- Auto add ([{' pairs
+      require('mini.map').setup()   -- Auto add ([{' pairs
       require('mini.diff').setup {
         -- view = { style = 'sign', signs = {
         --   add = '+',
@@ -302,8 +302,8 @@ require('lazy').setup {
         --   delete = '_',
         -- } },
         mappings = {
-          apply = 'gh', -- apply git hunk (stage)
-          reset = 'gH', -- reset git hunk
+          apply = 'gh',     -- apply git hunk (stage)
+          reset = 'gr',     -- reset git hunk
           goto_prev = '[c', -- navigate hunks
           goto_next = ']c',
           goto_first = '[C',
@@ -314,26 +314,26 @@ require('lazy').setup {
       vim.keymap.set('n', '<leader>gd', MiniDiff.toggle_overlay, {})
       vim.keymap.set('n', '<Leader>um', MiniMap.toggle)
 
-      -- ... And there is more!
       --  Check out: https://github.com/echasnovski/mini.nvim
-      require('mini.sessions').setup { autoread = true }
+      require('mini.sessions').setup()
       require('mini.statusline').setup()
     end,
   },
 
   { -- Highlight, edit, and navigate code
     'nvim-treesitter/nvim-treesitter',
+    dependencies = { 'filNaj/tree-setter' },
     build = ':TSUpdate',
     main = 'nvim-treesitter.configs', -- Sets main module to use for opts
-    -- [[ Configure Treesitter ]] See `:help nvim-treesitter`
+    -- See `:help nvim-treesitter`
     opts = {
-      -- ensure_installed = { 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc' },
       auto_install = true,
       highlight = {
         enable = true,
         additional_vim_regex_highlighting = { 'ruby' },
       },
       indent = { enable = true, disable = { 'ruby' } },
+      tree_setter = { enable = true },
     },
   },
   { -- Shows what you are editing in the top bar if off screen
@@ -357,15 +357,15 @@ require('lazy').setup {
             lookahead = true,
             include_surrounding_whitespace = true,
             keymaps = {
-              ['af'] = '@function.outer', -- methods
+              ['af'] = '@function.outer',  -- methods
               ['if'] = '@function.inner',
-              ['ac'] = '@class.outer', -- classes
+              ['ac'] = '@class.outer',     -- classes
               ['ic'] = '@class.inner',
-              ['i/'] = '@comment.inner', -- comments
+              ['i/'] = '@comment.inner',   -- comments
               ['a/'] = '@comment.outer',
               ['ia'] = '@parameter.inner', -- args
               ['aa'] = '@parameter.outer',
-              ['ir'] = '@return.inner', -- returns
+              ['ir'] = '@return.inner',    -- returns
               ['ar'] = '@return.outer',
             },
           },

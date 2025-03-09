@@ -29,12 +29,18 @@ return {
     local dapui = require 'dapui'
     return {
       -- Basic debugging keymaps, feel free to change to your liking!
-      { '<F5>', dap.continue, desc = 'Debug: Start/Continue' },
-      { '<F1>', dap.step_into, desc = 'Debug: Step Into' },
-      { '<F2>', dap.step_over, desc = 'Debug: Step Over' },
-      { '<F3>', dap.step_out, desc = 'Debug: Step Out' },
+      { '<F5>',       dap.continue,          desc = 'Debug: Start/Continue' },
+      { '<F1>',       dap.step_into,         desc = 'Debug: Step Into' },
+      { '<F2>',       dap.step_over,         desc = 'Debug: Step Over' },
+      { '<F3>',       dap.step_out,          desc = 'Debug: Step Out' },
       { '<leader>db', dap.toggle_breakpoint, desc = 'Debug: Toggle Breakpoint' },
-      { '<leader>dB', function() dap.set_breakpoint(vim.fn.input 'Breakpoint condition: ') end, desc = 'Debug: Set Breakpoint', },
+      {
+        '<leader>dB',
+        function()
+          dap.set_breakpoint(vim.fn.input 'Breakpoint condition: ')
+        end,
+        desc = 'Debug: Set Breakpoint',
+      },
       -- Toggle to see last session result. Without this, you can't see session output in case of unhandled exception.
       { '<F7>', dapui.toggle, desc = 'Debug: See last session result.' },
       unpack(keys),
@@ -76,6 +82,7 @@ return {
 
     -- Dap UI setup
     -- For more information, see |:help nvim-dap-ui|
+    ---@diagnostic disable-next-line: missing-fields
     dapui.setup {
       -- Set icons to characters that are more likely to work in every terminal.
       --    Feel free to remove or use ones that you like more! :)
@@ -103,7 +110,7 @@ return {
     vim.api.nvim_set_hl(0, 'DapStop', { fg = '#ffcc00' })
     local breakpoint_icons = vim.g.have_nerd_font
         and { Breakpoint = '', BreakpointCondition = '', BreakpointRejected = '', LogPoint = '', Stopped = '' }
-      or { Breakpoint = '●', BreakpointCondition = '⊜', BreakpointRejected = '⊘', LogPoint = '◆', Stopped = '⭔' }
+        or { Breakpoint = '●', BreakpointCondition = '⊜', BreakpointRejected = '⊘', LogPoint = '◆', Stopped = '⭔' }
     for type, icon in pairs(breakpoint_icons) do
       local tp = 'Dap' .. type
       local hl = (type == 'Stopped') and 'DapStop' or 'DapBreak'

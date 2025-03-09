@@ -58,9 +58,6 @@ vim.opt.undofile = true
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
 
--- Keep sign column on by default
--- vim.opt.signcolumn = 'yes'
-
 -- Decrease update time
 vim.opt.updatetime = 250
 vim.opt.timeoutlen = 300
@@ -85,11 +82,8 @@ vim.opt.smartindent = true
 -- Preview substitutions live, as you type!
 vim.opt.inccommand = 'split'
 
--- Show which line your cursor is on
-vim.opt.cursorline = true
-
 -- Minimal number of screen lines to keep above and below the cursor.
-vim.opt.scrolloff = 10
+vim.opt.scrolloff = 8
 
 -- Set <C-d> and <C-u> jump distance to half screen again
 vim.opt.scroll = 0
@@ -103,23 +97,25 @@ vim.opt.textwidth = 80
 -- Conceal some text (mainly for orgmode)
 vim.opt.conceallevel = 2
 
--- Alter file types
-vim.filetype.add { extension = { norg = 'org' } }
-
 -- GUI font
 vim.opt.guifont = 'JetBrainsMono\\ Nerd\\ Font:h11'
 
 -- Show source of diagnostics
 vim.diagnostic.config {
   virtual_text = {
-    source = true,
+    format = function(diagnostic)
+      local first_line = diagnostic.message:gmatch("[^\n]*")()
+      local first_sentence = string.match(first_line, "(.-%.)") or first_line
+      local first_lhs = string.match(first_sentence, "(.-): ")
+      -- first_sentence = string.sub(first_sentence, 1, 45).."..."
+      return first_lhs or first_sentence
+    end
   },
   update_in_insert = false,
   float = {
-    -- border = 'rounded',
+    border = 'rounded',
     source = true,
   },
 }
 
--- My tweaks on the default
-vim.api.nvim_set_hl(0, "Statement", { fg = "NvimLightMagenta", bold = true})
+vim.cmd.colorscheme "habamax"
